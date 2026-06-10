@@ -1,1425 +1,1252 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Deagan Rola</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
 
 :root {
-  --blue: #2563eb;
-  --blue-glow: #3b82f6;
-  --transition: 0.4s cubic-bezier(0.16,1,0.3,1);
+  --blue: #0071e3;
 }
 
 [data-theme="dark"] {
-  --bg: #0a0f1e;
-  --bg-mid: #111827;
-  --bg-card: rgba(255,255,255,0.03);
-  --border: rgba(255,255,255,0.07);
-  --border-hover: rgba(37,99,235,0.3);
-  --text: #f8fafc;
-  --text-dim: #94a3b8;
-  --text-dimmer: #475569;
-  --nav-bg: rgba(10,15,30,0.85);
-  --tag-bg: rgba(37,99,235,0.15);
-  --tag-border: rgba(37,99,235,0.3);
-  --grid-line: rgba(255,255,255,0.02);
-  --glow-color: rgba(37,99,235,0.08);
-  --stat-bar: #111827;
-  --phil-bg: rgba(37,99,235,0.08);
-  --phil-border: rgba(37,99,235,0.2);
-  --stroke: rgba(37,99,235,0.3);
+  --bg: #000;
+  --tile: #111;
+  --tile-hover: #161616;
+  --border: rgba(255,255,255,0.08);
+  --border-hover: rgba(255,255,255,0.18);
+  --text: #f5f5f7;
+  --text-dim: #a1a1a6;
+  --text-dimmer: #6e6e73;
+  --nav-bg: rgba(0,0,0,0.8);
+  --panel-bg: #141414;
+  --tag-bg: rgba(0,113,227,0.12);
+  --tag-border: rgba(0,113,227,0.25);
+  --overlay: rgba(0,0,0,0.55);
 }
 
 [data-theme="light"] {
-  --bg: #f8fafc;
-  --bg-mid: #f1f5f9;
-  --bg-card: rgba(0,0,0,0.02);
+  --bg: #f5f5f7;
+  --tile: #ffffff;
+  --tile-hover: #fafafa;
   --border: rgba(0,0,0,0.08);
-  --border-hover: rgba(37,99,235,0.4);
-  --text: #0a0f1e;
-  --text-dim: #475569;
-  --text-dimmer: #94a3b8;
-  --nav-bg: rgba(248,250,252,0.9);
-  --tag-bg: rgba(37,99,235,0.08);
-  --tag-border: rgba(37,99,235,0.2);
-  --grid-line: rgba(0,0,0,0.03);
-  --glow-color: rgba(37,99,235,0.05);
-  --stat-bar: #f1f5f9;
-  --phil-bg: rgba(37,99,235,0.05);
-  --phil-border: rgba(37,99,235,0.15);
-  --stroke: rgba(37,99,235,0.2);
+  --border-hover: rgba(0,0,0,0.2);
+  --text: #1d1d1f;
+  --text-dim: #6e6e73;
+  --text-dimmer: #a1a1a6;
+  --nav-bg: rgba(245,245,247,0.8);
+  --panel-bg: #ffffff;
+  --tag-bg: rgba(0,113,227,0.08);
+  --tag-border: rgba(0,113,227,0.2);
+  --overlay: rgba(0,0,0,0.25);
 }
 
-* { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; overflow: hidden; }
 
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: 'Inter', sans-serif;
-  overflow-x: hidden;
-  transition: background var(--transition), color var(--transition);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* NAV */
+/* ── NAV ── */
 nav {
-  position: fixed;
-  top:0; left:0; right:0;
-  z-index: 100;
-  padding: 18px 60px;
+  height: 52px;
+  padding: 0 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: var(--nav-bg);
-  backdrop-filter: blur(12px);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
   border-bottom: 1px solid var(--border);
-  transition: background var(--transition);
+  position: relative;
+  z-index: 10;
 }
-
-.nav-logo {
-  font-size: 22px;
-  font-weight: 800;
-  letter-spacing: -0.5px;
-  color: var(--text);
-  text-decoration: none;
-}
-.nav-logo span { color: var(--blue); }
-
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: 36px;
-}
-
-.nav-links {
-  display: flex;
-  gap: 32px;
-  list-style: none;
-}
-
-.nav-links a {
-  color: var(--text-dim);
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 500;
-  transition: color 0.3s;
-}
-.nav-links a:hover { color: var(--text); }
+.nav-logo { font-size: 15px; font-weight: 600; letter-spacing: -0.3px; color: var(--text); text-decoration: none; }
+.nav-right { display: flex; align-items: center; gap: 16px; }
+.nav-domain { font-size: 12px; color: var(--text-dimmer); letter-spacing: -0.01em; }
 
 .theme-toggle {
-  width: 44px; height: 24px;
-  background: var(--border-hover);
-  border-radius: 100px;
-  border: none;
-  cursor: pointer;
-  position: relative;
-  transition: background 0.3s;
-  flex-shrink: 0;
+  width: 40px; height: 22px;
+  background: var(--text-dimmer);
+  border-radius: 100px; border: none; cursor: pointer;
+  position: relative; transition: background 0.3s; flex-shrink: 0;
 }
-
 .theme-toggle::after {
-  content: '';
-  position: absolute;
-  top: 3px; left: 3px;
-  width: 18px; height: 18px;
-  border-radius: 50%;
-  background: white;
-  transition: transform 0.3s;
+  content: ''; position: absolute; top: 3px; left: 3px;
+  width: 16px; height: 16px; border-radius: 50%; background: white;
+  transition: transform 0.3s ease; box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+[data-theme="light"] .theme-toggle::after { transform: translateX(18px); }
+[data-theme="light"] .theme-toggle { background: var(--blue); }
+
+/* ── GRID ── */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 8px;
+  height: calc(100vh - 52px);
+  padding: 8px;
 }
 
-[data-theme="light"] .theme-toggle::after {
-  transform: translateX(20px);
-}
-
-[data-theme="light"] .theme-toggle {
-  background: var(--blue);
-}
-
-/* HERO */
-#hero {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  padding: 0 60px;
+/* ── TILES ── */
+.tile {
+  background: var(--tile);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 24px;
   position: relative;
   overflow: hidden;
-}
-
-.hero-bg {
-  position: absolute; inset: 0;
-  background:
-    radial-gradient(ellipse 80% 60% at 60% 40%, rgba(37,99,235,0.12) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(59,130,246,0.06) 0%, transparent 60%);
-}
-
-[data-theme="light"] .hero-bg {
-  background:
-    radial-gradient(ellipse 80% 60% at 60% 40%, rgba(37,99,235,0.07) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(59,130,246,0.04) 0%, transparent 60%);
-}
-
-.hero-grid {
-  position: absolute; inset: 0;
-  background-image:
-    linear-gradient(var(--grid-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-  background-size: 60px 60px;
-}
-
-.hero-content {
-  position: relative;
-  z-index: 2;
-  max-width: 800px;
-}
-
-.hero-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--tag-bg);
-  border: 1px solid var(--tag-border);
-  border-radius: 100px;
-  padding: 6px 16px;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--blue-glow);
-  margin-bottom: 32px;
-  opacity: 0;
-  animation: fadeUp 0.8s 0.2s forwards;
-}
-
-.hero-tag::before {
-  content: '';
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--blue-glow);
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%,100% { opacity:1; }
-  50% { opacity:0.3; }
-}
-
-.hero-title {
-  font-size: clamp(48px, 7vw, 88px);
-  font-weight: 900;
-  line-height: 1.0;
-  letter-spacing: -2px;
-  margin-bottom: 24px;
-  opacity: 0;
-  animation: fadeUp 0.8s 0.4s forwards;
-}
-
-.hero-title .hollow {
-  color: transparent;
-  -webkit-text-stroke: 2px var(--stroke);
-}
-
-[data-theme="light"] .hero-title .hollow {
-  -webkit-text-stroke: 2px rgba(10,15,30,0.2);
-}
-
-.hero-title .blue { color: var(--blue); }
-
-.hero-sub {
-  font-size: clamp(16px, 2vw, 19px);
-  color: var(--text-dim);
-  line-height: 1.7;
-  max-width: 560px;
-  margin-bottom: 48px;
-  font-weight: 400;
-  opacity: 0;
-  animation: fadeUp 0.8s 0.6s forwards;
-}
-.hero-sub strong { color: var(--text); font-weight: 600; }
-
-.hero-ctas {
+  transition: background 0.2s, border-color 0.2s;
+  cursor: pointer;
   display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-  opacity: 0;
-  animation: fadeUp 0.8s 0.8s forwards;
+  flex-direction: column;
+  animation: tileIn 0.5s ease backwards;
 }
+.tile {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+}
+[data-theme="dark"] .tile {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.4), 0 4px 16px rgba(0,0,0,0.3);
+}
+.tile:hover { border-color: var(--border-hover); }
+.tile > * { position: relative; z-index: 1; }
+.tile::after {
+  content: ''; position: absolute; inset: 0; border-radius: inherit;
+  background: rgba(255,255,255,0); pointer-events: none;
+  transition: background 0.2s;
+}
+.tile:hover::after { background: rgba(255,255,255,0.12); }
+[data-theme="light"] .tile:hover::after { background: rgba(255,255,255,0.45); }
+
+
+.tile-arrow {
+  position: absolute; top: 20px; right: 20px;
+  font-size: 13px; color: var(--text-dimmer);
+  transition: transform 0.2s, color 0.2s;
+}
+.tile:hover .tile-arrow { transform: translate(2px, -2px); color: var(--text-dim); }
+
+.tile-label {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.05em; text-transform: uppercase;
+  color: var(--text-dimmer); margin-bottom: 10px;
+}
+.tile-title {
+  font-size: 16px; font-weight: 600;
+  letter-spacing: -0.02em; color: var(--text);
+  line-height: 1.25; margin-bottom: 8px;
+}
+.tile-preview {
+  font-size: 13px; color: var(--text-dim);
+  line-height: 1.55; letter-spacing: -0.01em;
+}
+.tile-footer { margin-top: auto; padding-top: 12px; }
+
+/* Grid areas */
+.tile-about      { grid-area: 1 / 1 / 2 / 2; animation-delay: 0.05s; }
+.tile-center     { grid-area: 1 / 2 / 3 / 3; cursor: default; animation-delay: 0.1s; }
+.tile-skills     { grid-area: 1 / 3 / 2 / 4; animation-delay: 0.15s; }
+.tile-work       { grid-area: 2 / 1 / 3 / 2; animation-delay: 0.2s; }
+.tile-experience { grid-area: 2 / 3 / 3 / 4; animation-delay: 0.25s; }
+.tile-blog       { grid-area: 3 / 1 / 4 / 2; animation-delay: 0.3s; }
+.tile-philosophy { grid-area: 3 / 2 / 4 / 3; animation-delay: 0.35s; }
+.tile-connect    { grid-area: 3 / 3 / 4 / 4; animation-delay: 0.4s; }
+
+/* ── CENTER TILE ── */
+.tile-center {
+  display: flex; flex-direction: column;
+  justify-content: center; padding: 40px;
+}
+.tile-center:hover { background: var(--tile); border-color: var(--border); }
+.tile-center::after { display: none; }
+
+
+.center-name {
+  font-size: clamp(30px, 3.2vw, 48px); font-weight: 700;
+  letter-spacing: -0.04em; line-height: 1.2;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+.center-title {
+  font-size: clamp(13px, 1.3vw, 16px); color: var(--text-dim);
+  font-weight: 400; letter-spacing: -0.01em;
+  margin-bottom: 18px; line-height: 1.4;
+}
+.center-bio {
+  font-size: 13px; color: var(--text-dim);
+  line-height: 1.6; letter-spacing: -0.01em;
+  max-width: 320px; margin-bottom: 24px;
+}
+
+.center-stats {
+  display: flex; gap: 20px; margin-bottom: 24px; flex-wrap: wrap;
+}
+.c-stat { display: flex; flex-direction: column; gap: 2px; }
+.c-stat-num {
+  font-size: 20px; font-weight: 600;
+  color: var(--text); letter-spacing: -0.03em;
+}
+.c-stat-num span { color: var(--blue); }
+.c-stat-label {
+  font-size: 10px; color: var(--text-dimmer);
+  letter-spacing: 0.04em; text-transform: uppercase;
+}
+
+.center-actions { display: flex; gap: 10px; margin-bottom: 22px; flex-wrap: wrap; }
 
 .btn-primary {
-  padding: 14px 32px;
-  background: var(--blue);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.3s;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+  padding: 10px 20px; background: var(--blue); color: white;
+  border: none; border-radius: 980px; font-size: 13px; font-weight: 500;
+  cursor: pointer; text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+  letter-spacing: -0.01em; font-family: inherit; display: inline-block;
 }
-.btn-primary:hover {
-  background: var(--blue-glow);
-  transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(37,99,235,0.35);
-}
+.btn-primary:hover { background: #0077ed; transform: scale(1.02); }
 
-.btn-secondary {
-  padding: 14px 32px;
-  background: transparent;
-  color: var(--text);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.3s;
+.btn-ghost {
+  padding: 10px 20px; background: transparent; color: var(--text);
+  border: 1px solid var(--border); border-radius: 980px;
+  font-size: 13px; font-weight: 500; cursor: pointer; text-decoration: none;
+  transition: background 0.2s, border-color 0.2s;
+  letter-spacing: -0.01em; font-family: inherit;
 }
-.btn-secondary:hover {
-  border-color: var(--border-hover);
-  background: var(--bg-card);
-  transform: translateY(-2px);
-}
+.btn-ghost:hover { background: var(--tile-hover); border-color: var(--border-hover); }
 
-.hero-scroll {
-  position: absolute;
-  bottom: 40px; left: 60px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: var(--text-dimmer);
-  font-size: 12px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  opacity: 0;
-  animation: fadeUp 0.8s 1.2s forwards;
+.center-links { display: flex; gap: 18px; flex-wrap: wrap; }
+.center-link {
+  font-size: 12px; color: var(--text-dimmer); text-decoration: none;
+  letter-spacing: -0.01em; transition: color 0.2s;
 }
-.scroll-line { width: 40px; height: 1px; background: var(--text-dimmer); }
+.center-link:hover { color: var(--blue); }
 
-/* STATS */
-.stats-bar {
-  background: var(--stat-bar);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  padding: 32px 60px;
-  display: flex;
-  gap: 60px;
-  overflow-x: auto;
-}
-.stat { display: flex; flex-direction: column; gap: 4px; white-space: nowrap; }
-.stat-num { font-size: 28px; font-weight: 800; color: var(--text); letter-spacing: -1px; }
-.stat-num span { color: var(--blue); }
-.stat-label { font-size: 12px; color: var(--text-dimmer); font-weight: 500; }
-
-/* SECTIONS */
-section { padding: 100px 60px; }
-
-.section-tag {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--blue);
-  margin-bottom: 16px;
-}
-
-.section-title {
-  font-size: clamp(32px, 4vw, 52px);
-  font-weight: 800;
-  letter-spacing: -1.5px;
-  line-height: 1.1;
-  margin-bottom: 20px;
-  color: var(--text);
-}
-
-.section-sub {
-  font-size: 17px;
-  color: var(--text-dim);
-  line-height: 1.7;
-  max-width: 600px;
-}
-
-/* ABOUT */
-#about { background: var(--bg-mid); }
-
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: center;
-  margin-top: 60px;
-}
-
-.about-text p {
-  font-size: 17px;
-  color: var(--text-dim);
-  line-height: 1.8;
-  margin-bottom: 20px;
-}
-.about-text p strong { color: var(--text); font-weight: 600; }
-
-.story-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--blue-glow);
-  font-weight: 600;
-  font-size: 15px;
-  text-decoration: none;
-  margin-top: 12px;
-  transition: gap 0.3s;
-  cursor: pointer;
-}
-.story-link:hover { gap: 14px; }
-
-.about-right { display: flex; flex-direction: column; gap: 16px; }
-
-.about-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 22px 26px;
-  transition: all 0.3s;
-}
-.about-card:hover {
-  border-color: var(--border-hover);
-  background: var(--phil-bg);
-  transform: translateX(6px);
-}
-.about-card-label {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--blue);
-  margin-bottom: 6px;
-}
-.about-card-text { font-size: 15px; color: var(--text); font-weight: 500; line-height: 1.5; }
-
-/* SEEDS AND BRICKS SECTION */
-#seeds-bricks { background: var(--bg); }
-
-.sb-tabs {
-  display: flex;
-  gap: 0;
-  margin: 48px 0 40px;
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid var(--border);
-  width: fit-content;
-}
-
-.sb-tab {
-  padding: 14px 36px;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-  background: transparent;
-  color: var(--text-dim);
-  border: none;
-  letter-spacing: 0.3px;
-  transition: all 0.3s;
-}
-
-.sb-tab.active {
-  background: var(--blue);
-  color: white;
-}
-
-.sb-tab:not(.active):hover {
-  background: var(--bg-card);
-  color: var(--text);
-}
-
-.sb-panel { display: none; }
-.sb-panel.active { display: block; }
-
-/* SEEDS - skills */
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-}
-
-.skill-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 24px;
-  transition: all 0.3s;
-}
-.skill-card:hover {
-  border-color: var(--border-hover);
-  transform: translateY(-3px);
-}
-.skill-category {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--blue);
-  margin-bottom: 14px;
-}
-.skill-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.skill-pill {
-  padding: 5px 12px;
-  background: var(--tag-bg);
-  border: 1px solid var(--tag-border);
-  border-radius: 100px;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--text);
-}
-
-/* BRICKS - experience */
-.timeline {
-  position: relative;
-  padding-left: 32px;
-}
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 8px; bottom: 8px;
-  width: 1px;
-  background: linear-gradient(to bottom, var(--blue), transparent);
-}
-
-.timeline-item {
-  position: relative;
-  margin-bottom: 48px;
-  opacity: 0;
-  transform: translateX(-16px);
-  transition: all 0.6s var(--transition);
-}
-.timeline-item.visible {
-  opacity: 1;
-  transform: translateX(0);
-}
-.timeline-item::before {
-  content: '';
-  position: absolute;
-  left: -36px; top: 6px;
-  width: 10px; height: 10px;
-  border-radius: 50%;
-  background: var(--blue);
-  box-shadow: 0 0 0 3px var(--phil-bg);
-}
-
-.timeline-date {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--blue);
-  margin-bottom: 8px;
-}
-.timeline-role {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 4px;
-  letter-spacing: -0.3px;
-}
-.timeline-company {
-  font-size: 14px;
-  color: var(--text-dimmer);
-  font-weight: 500;
-  margin-bottom: 14px;
-}
-.timeline-desc {
-  font-size: 15px;
-  color: var(--text-dim);
-  line-height: 1.75;
-  margin-bottom: 16px;
-}
-.timeline-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-.timeline-tag {
-  padding: 4px 10px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  font-size: 11px;
-  color: var(--text-dimmer);
-  font-weight: 500;
-}
-
-/* PHILOSOPHY */
-#philosophy {
-  position: relative;
-  overflow: hidden;
-  background: var(--bg-mid);
-}
-.philosophy-bg {
-  position: absolute; inset: 0;
-  background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(37,99,235,0.06) 0%, transparent 70%);
-}
-.philosophy-content { position: relative; z-index: 2; }
-
-.philosophy-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  margin-top: 60px;
-}
-
-.phil-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 40px;
-  transition: all 0.4s;
-  position: relative;
-  overflow: hidden;
-}
-.phil-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--blue), transparent);
-  opacity: 0;
-  transition: opacity 0.4s;
-}
-.phil-card:hover::before { opacity: 1; }
-.phil-card:hover {
-  border-color: var(--border-hover);
-  transform: translateY(-4px);
-}
-
-.phil-letter {
-  font-size: 72px;
-  font-weight: 900;
-  color: transparent;
-  -webkit-text-stroke: 1px var(--stroke);
-  line-height: 1;
-  margin-bottom: 20px;
-}
-.phil-card h3 {
-  font-size: 22px;
-  font-weight: 700;
-  margin-bottom: 12px;
-  letter-spacing: -0.5px;
-  color: var(--text);
-}
-.phil-card p { font-size: 15px; color: var(--text-dim); line-height: 1.7; }
-
-.philosophy-principle {
-  margin-top: 48px;
-  text-align: center;
-  padding: 48px;
-  background: var(--phil-bg);
-  border: 1px solid var(--phil-border);
-  border-radius: 16px;
-}
-.philosophy-principle p { font-size: 18px; color: var(--text-dim); line-height: 2.2; }
-.philosophy-principle strong { color: var(--text); font-weight: 700; }
-.philosophy-principle .final {
-  font-size: 20px;
-  color: var(--blue-glow);
-  font-weight: 700;
-  margin-top: 8px;
-  display: block;
-}
-.dr-easter { margin-top: 24px; font-size: 13px; color: var(--text-dimmer); font-style: italic; }
-
-/* WORK */
-#work { background: var(--bg); }
-
-.work-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 60px;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-.project-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 32px;
-  transition: all 0.4s;
-}
-.project-card.featured {
-  grid-column: span 2;
-  background: var(--phil-bg);
-  border-color: var(--phil-border);
-}
-.project-card:hover {
-  transform: translateY(-6px);
-  border-color: var(--border-hover);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-}
-
-.project-tag {
-  display: inline-block;
-  padding: 4px 12px;
-  background: var(--tag-bg);
-  border-radius: 100px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--blue-glow);
-  margin-bottom: 18px;
-}
-.project-card h3 {
-  font-size: 19px;
-  font-weight: 700;
-  margin-bottom: 10px;
-  letter-spacing: -0.3px;
-  line-height: 1.3;
-  color: var(--text);
-}
-.project-card p { font-size: 14px; color: var(--text-dim); line-height: 1.75; }
-.project-footer {
-  margin-top: 22px;
-  padding-top: 18px;
-  border-top: 1px solid var(--border);
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-.tech-tag {
-  padding: 4px 10px;
-  background: var(--bg-card);
-  border-radius: 4px;
-  font-size: 11px;
-  color: var(--text-dimmer);
-  font-weight: 500;
-  border: 1px solid var(--border);
-}
-
-/* BLOG */
-#blog { background: var(--bg-mid); }
-
-.blog-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  margin-top: 60px;
-}
-
-.blog-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  overflow: hidden;
-  transition: all 0.4s;
-  cursor: pointer;
-}
-.blog-card:hover {
-  transform: translateY(-6px);
-  border-color: var(--border-hover);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.12);
-}
-
-.blog-thumb {
-  height: 180px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 48px;
-  position: relative;
-  overflow: hidden;
-}
-
-.blog-thumb-1 { background: linear-gradient(135deg, #0f172a, #1e3a5f); }
-.blog-thumb-2 { background: linear-gradient(135deg, #0f1a2e, #1a2f1a); }
-.blog-thumb-3 { background: linear-gradient(135deg, #1a0f2e, #2d1a4a); }
-
-[data-theme="light"] .blog-thumb-1 { background: linear-gradient(135deg, #dbeafe, #bfdbfe); }
-[data-theme="light"] .blog-thumb-2 { background: linear-gradient(135deg, #dcfce7, #bbf7d0); }
-[data-theme="light"] .blog-thumb-3 { background: linear-gradient(135deg, #ede9fe, #ddd6fe); }
-
-.blog-body { padding: 28px; }
-
-.blog-meta {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 14px;
-}
-.blog-cat {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--blue);
-}
-.blog-date { font-size: 12px; color: var(--text-dimmer); }
-
-.blog-card h3 {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--text);
-  line-height: 1.4;
-  margin-bottom: 10px;
-  letter-spacing: -0.3px;
-}
-.blog-card p { font-size: 14px; color: var(--text-dim); line-height: 1.7; }
-
-.blog-footer {
-  padding: 16px 28px;
-  border-top: 1px solid var(--border);
-  font-size: 13px;
-  color: var(--blue-glow);
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: gap 0.3s;
-}
-.blog-card:hover .blog-footer { gap: 10px; }
-
-/* CONNECT */
-#connect {
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  background: var(--bg);
-}
-.connect-bg {
-  position: absolute; inset: 0;
-  background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(37,99,235,0.08) 0%, transparent 70%);
-}
-.connect-content {
-  position: relative;
-  z-index: 2;
-  max-width: 600px;
-  margin: 0 auto;
-}
-.connect-content .section-sub { margin: 0 auto 48px; }
-
-.connect-email {
-  display: block;
-  font-size: clamp(16px, 2.2vw, 22px);
-  font-weight: 700;
-  color: var(--blue-glow);
-  text-decoration: none;
-  margin-bottom: 40px;
-  transition: color 0.3s;
-  letter-spacing: -0.3px;
-}
-.connect-email:hover { color: var(--text); }
-
-.social-links {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-.social-link {
-  padding: 12px 24px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  color: var(--text-dim);
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 500;
-  transition: all 0.3s;
-}
-.social-link:hover {
-  background: var(--phil-bg);
-  border-color: var(--border-hover);
-  color: var(--text);
-}
-
-/* FOOTER */
-footer {
-  padding: 28px 60px;
-  border-top: 1px solid var(--border);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  background: var(--bg-mid);
-}
-footer p { font-size: 13px; color: var(--text-dimmer); }
-.footer-logo { font-size: 16px; font-weight: 800; color: var(--text); }
-.footer-logo span { color: var(--blue); }
-
-/* STORY MODAL */
-.modal-overlay {
-  position: fixed;
+/* ── ABOUT GRID PATTERN ── */
+#aboutGridBg {
+  position: absolute !important;
   inset: 0;
-  background: rgba(0,0,0,0.7);
-  backdrop-filter: blur(8px);
-  z-index: 200;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 40px;
-  opacity: 0;
+  z-index: 0 !important;
   pointer-events: none;
-  transition: opacity 0.4s;
+  overflow: hidden;
+  border-radius: inherit;
+  -webkit-mask-image: radial-gradient(500px circle at center, white, transparent);
+  mask-image: radial-gradient(500px circle at center, white, transparent);
 }
-.modal-overlay.open {
-  opacity: 1;
-  pointer-events: all;
-}
-.modal {
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  max-width: 720px;
-  width: 100%;
-  max-height: 80vh;
-  overflow-y: auto;
-  padding: 56px;
-  position: relative;
-  transform: translateY(20px);
-  transition: transform 0.4s;
-}
-.modal-overlay.open .modal { transform: translateY(0); }
-
-.modal-close {
+#aboutGridBg svg {
   position: absolute;
-  top: 24px; right: 24px;
-  width: 36px; height: 36px;
-  border-radius: 50%;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  color: var(--text-dim);
-  font-size: 18px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s;
+  left: 0; right: 0;
+  top: -30%;
+  width: 100%;
+  height: 200%;
+  transform: skewY(12deg);
+  transform-origin: center;
+  stroke: rgba(0,0,0,0.18);
+  fill: rgba(0,0,0,0.12);
 }
-.modal-close:hover {
-  background: var(--phil-bg);
-  border-color: var(--border-hover);
-  color: var(--text);
+[data-theme="dark"] #aboutGridBg svg {
+  stroke: rgba(255,255,255,0.14);
+  fill: rgba(255,255,255,0.09);
 }
 
-.modal h2 {
-  font-size: 32px;
-  font-weight: 800;
-  letter-spacing: -1px;
-  margin-bottom: 8px;
-  color: var(--text);
-}
-.modal-sub {
-  font-size: 15px;
-  color: var(--text-dimmer);
-  margin-bottom: 36px;
-  padding-bottom: 32px;
-  border-bottom: 1px solid var(--border);
-}
-.modal-body p {
-  font-size: 16px;
-  color: var(--text-dim);
-  line-height: 1.85;
-  margin-bottom: 20px;
-}
-.modal-body p strong { color: var(--text); font-weight: 600; }
-.modal-body .quote {
-  font-size: 18px;
-  font-style: italic;
-  color: var(--blue-glow);
-  border-left: 3px solid var(--blue);
-  padding-left: 20px;
-  margin: 32px 0;
-  line-height: 1.7;
-  font-weight: 500;
-}
-
-/* ANIMATIONS */
-@keyframes fadeUp {
-  from { opacity:0; transform:translateY(24px); }
-  to { opacity:1; transform:translateY(0); }
-}
-.reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.reveal.visible { opacity:1; transform:translateY(0); }
-
-.cursor-glow {
-  position: fixed;
-  width: 320px; height: 320px;
-  border-radius: 50%;
-  background: radial-gradient(circle, var(--glow-color) 0%, transparent 70%);
+/* ── SEEDS FLICKERING GRID ── */
+#seedsGridBg {
+  position: absolute !important;
+  inset: 0;
+  z-index: 0 !important;
   pointer-events: none;
-  transform: translate(-50%, -50%);
-  z-index: 0;
-  transition: left 0.08s, top 0.08s;
+  border-radius: inherit;
+  overflow: hidden;
+  -webkit-mask-image: radial-gradient(600px circle at center, white, transparent);
+  mask-image: radial-gradient(600px circle at center, white, transparent);
 }
+#seedsGridBg canvas { display: block; }
+
+/* ── SKILL PILLS PREVIEW ── */
+.skill-pills-preview { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.pill-sm {
+  padding: 3px 10px; background: var(--tag-bg); border: 1px solid var(--tag-border);
+  border-radius: 980px; font-size: 11px; color: var(--text-dim); font-weight: 400;
+}
+
+/* ── WORK PREVIEW ── */
+.work-preview-item { padding: 9px 0; border-bottom: 1px solid var(--border); }
+.work-preview-item:last-child { border-bottom: none; }
+.work-preview-name { font-size: 13px; font-weight: 500; color: var(--text); letter-spacing: -0.01em; margin-bottom: 2px; }
+.work-preview-type { font-size: 11px; color: var(--text-dimmer); }
+
+/* ── CONNECT PREVIEW ── */
+.connect-email-preview { font-size: 12px; color: var(--blue); letter-spacing: -0.01em; margin-top: 8px; }
+
+/* ── PANEL OVERLAY ── */
+.panel-overlay {
+  position: fixed; inset: 0; background: var(--overlay); z-index: 50;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s; backdrop-filter: blur(2px);
+}
+.panel-overlay.open { opacity: 1; pointer-events: all; }
+
+/* ── SLIDE PANEL ── */
+.panel {
+  position: fixed; bottom: 0; left: 0; right: 0; height: 72vh;
+  background: var(--panel-bg); border-top: 1px solid var(--border);
+  border-radius: 20px 20px 0 0;
+  z-index: 60; transform: translateY(100%);
+  transition: transform 0.42s cubic-bezier(0.25, 0.1, 0.25, 1);
+  display: flex; flex-direction: column; overflow: hidden;
+}
+.panel.open { transform: translateY(0); }
+
+.panel-header {
+  padding: 20px 32px 16px; border-bottom: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: flex-start; flex-shrink: 0;
+}
+.panel-title { font-size: 20px; font-weight: 600; letter-spacing: -0.03em; color: var(--text); }
+.panel-subtitle { font-size: 12px; color: var(--text-dimmer); margin-top: 3px; letter-spacing: -0.01em; }
+.panel-close {
+  width: 26px; height: 26px; border-radius: 50%; background: var(--border);
+  border: none; cursor: pointer; color: var(--text-dim); font-size: 13px;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s; flex-shrink: 0; font-family: inherit;
+}
+.panel-close:hover { background: var(--border-hover); }
+
+.panel-body {
+  flex: 1; overflow-y: auto; padding: 24px 32px;
+  scrollbar-width: thin; scrollbar-color: var(--border) transparent;
+}
+
+/* ── PANEL CONTENT ── */
+
+/* About */
+.panel-text p { font-size: 15px; color: var(--text-dim); line-height: 1.75; margin-bottom: 18px; letter-spacing: -0.01em; }
+.panel-text p strong { color: var(--text); font-weight: 500; }
+
+.info-rows { margin-top: 22px; }
+.info-row { padding: 14px 0; border-bottom: 1px solid var(--border); display: flex; flex-direction: column; gap: 4px; }
+.info-row:first-child { border-top: 1px solid var(--border); }
+.info-label { font-size: 10px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-dimmer); }
+.info-value { font-size: 14px; color: var(--text); letter-spacing: -0.01em; }
+
+/* Skills */
+.skills-panel-grid { display: flex; flex-direction: column; gap: 22px; }
+.skill-group-title { font-size: 10px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-dimmer); margin-bottom: 10px; }
+.skill-pills { display: flex; flex-wrap: wrap; gap: 7px; }
+.skill-pill {
+  padding: 6px 13px; background: var(--tag-bg); border: 1px solid var(--tag-border);
+  border-radius: 980px; font-size: 13px; font-weight: 400; color: var(--text); letter-spacing: -0.01em;
+}
+
+/* Experience */
+.exp-items { display: flex; flex-direction: column; }
+.exp-item { padding: 22px 0; border-bottom: 1px solid var(--border); }
+.exp-item:first-child { border-top: 1px solid var(--border); }
+.exp-date { font-size: 11px; color: var(--text-dimmer); letter-spacing: -0.01em; margin-bottom: 6px; }
+.exp-role { font-size: 17px; font-weight: 600; color: var(--text); letter-spacing: -0.02em; margin-bottom: 2px; }
+.exp-company { font-size: 13px; color: var(--blue); margin-bottom: 12px; letter-spacing: -0.01em; }
+.exp-desc { font-size: 14px; color: var(--text-dim); line-height: 1.7; letter-spacing: -0.01em; margin-bottom: 14px; }
+.exp-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.exp-tag { padding: 3px 10px; border: 1px solid var(--border); border-radius: 980px; font-size: 11px; color: var(--text-dimmer); }
+
+/* Work */
+.work-items { display: flex; flex-direction: column; gap: 14px; }
+.work-item { background: var(--tile); border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px; }
+.work-item-type { font-size: 10px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--blue); margin-bottom: 8px; }
+.work-item-title { font-size: 15px; font-weight: 600; color: var(--text); letter-spacing: -0.02em; margin-bottom: 8px; line-height: 1.3; }
+.work-item-desc { font-size: 13px; color: var(--text-dim); line-height: 1.65; letter-spacing: -0.01em; margin-bottom: 14px; }
+.work-item-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.work-tag { padding: 3px 10px; border: 1px solid var(--border); border-radius: 980px; font-size: 11px; color: var(--text-dimmer); }
+
+/* Blog */
+.blog-items { display: flex; flex-direction: column; gap: 14px; }
+.blog-item { background: var(--tile); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+.blog-thumb { height: 80px; display: flex; align-items: flex-end; padding: 12px 16px; }
+.blog-thumb-1 { background: linear-gradient(160deg, #001a3a, #003880); }
+.blog-thumb-2 { background: linear-gradient(160deg, #001a10, #003320); }
+.blog-thumb-3 { background: linear-gradient(160deg, #1a001a, #380038); }
+[data-theme="light"] .blog-thumb-1 { background: linear-gradient(160deg, #e8f0fe, #c2d6fc); }
+[data-theme="light"] .blog-thumb-2 { background: linear-gradient(160deg, #e6f4ea, #c3e6cb); }
+[data-theme="light"] .blog-thumb-3 { background: linear-gradient(160deg, #f3e8fd, #ddb8f7); }
+.blog-thumb-label { font-size: 10px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+[data-theme="light"] .blog-thumb-label { color: rgba(0,0,0,0.4); }
+.blog-item-body { padding: 14px 16px; }
+.blog-item-cat { font-size: 10px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--blue); margin-bottom: 6px; }
+.blog-item-title { font-size: 14px; font-weight: 600; color: var(--text); letter-spacing: -0.02em; line-height: 1.35; margin-bottom: 7px; }
+.blog-item-desc { font-size: 12px; color: var(--text-dim); line-height: 1.6; letter-spacing: -0.01em; }
+.blog-item-footer { padding: 10px 16px; border-top: 1px solid var(--border); font-size: 11px; color: var(--blue); }
+
+/* Philosophy */
+.phil-items { display: flex; flex-direction: column; }
+.phil-item { padding: 22px 0; border-bottom: 1px solid var(--border); }
+.phil-item:first-child { border-top: 1px solid var(--border); }
+.phil-item-label { font-size: 10px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--blue); margin-bottom: 8px; }
+.phil-item-title { font-size: 17px; font-weight: 600; color: var(--text); letter-spacing: -0.02em; margin-bottom: 10px; line-height: 1.2; }
+.phil-item-text { font-size: 14px; color: var(--text-dim); line-height: 1.7; letter-spacing: -0.01em; }
+.phil-principle { margin-top: 22px; padding: 22px; background: var(--tile); border: 1px solid var(--border); border-radius: 14px; text-align: center; }
+.phil-principle p { font-size: 15px; color: var(--text-dim); line-height: 1.85; letter-spacing: -0.01em; }
+.phil-principle strong { color: var(--text); font-weight: 500; }
+.phil-principle .final { display: block; font-size: 17px; font-weight: 600; color: var(--text); letter-spacing: -0.03em; margin-top: 14px; }
+.phil-easter { margin-top: 10px; font-size: 12px; color: var(--text-dimmer); font-style: italic; }
+
+/* Connect */
+.connect-panel-email { display: block; font-size: 16px; color: var(--blue); text-decoration: none; letter-spacing: -0.02em; margin-bottom: 24px; transition: opacity 0.2s; }
+.connect-panel-email:hover { opacity: 0.7; }
+.connect-social-links { display: flex; flex-direction: column; gap: 10px; }
+.connect-social-link {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 16px; background: var(--tile); border: 1px solid var(--border);
+  border-radius: 12px; text-decoration: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+.connect-social-link:hover { border-color: var(--border-hover); background: var(--tile-hover); }
+.connect-social-name { font-size: 14px; color: var(--text); font-weight: 500; letter-spacing: -0.01em; }
+.connect-social-handle { font-size: 12px; color: var(--text-dimmer); letter-spacing: -0.01em; }
+
+/* ── STORY MODAL ── */
+.story-overlay {
+  position: fixed; inset: 0; background: var(--overlay); z-index: 100;
+  display: flex; align-items: center; justify-content: center; padding: 40px;
+  opacity: 0; pointer-events: none; transition: opacity 0.3s; backdrop-filter: blur(4px);
+}
+.story-overlay.open { opacity: 1; pointer-events: all; }
+
+.story-modal {
+  background: var(--panel-bg); border: 1px solid var(--border); border-radius: 20px;
+  max-width: 660px; width: 100%; max-height: 80vh; overflow-y: auto;
+  padding: 44px; position: relative;
+  transform: translateY(14px) scale(0.98);
+  transition: transform 0.32s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+.story-overlay.open .story-modal { transform: translateY(0) scale(1); }
+.story-close {
+  position: absolute; top: 18px; right: 18px;
+  width: 26px; height: 26px; border-radius: 50%; background: var(--border);
+  border: none; cursor: pointer; color: var(--text-dim); font-size: 13px;
+  display: flex; align-items: center; justify-content: center; transition: background 0.2s;
+  font-family: inherit;
+}
+.story-close:hover { background: var(--border-hover); }
+.story-modal h2 { font-size: 26px; font-weight: 700; letter-spacing: -0.04em; margin-bottom: 5px; color: var(--text); }
+.story-sub { font-size: 13px; color: var(--text-dimmer); margin-bottom: 24px; padding-bottom: 22px; border-bottom: 1px solid var(--border); letter-spacing: -0.01em; }
+.story-modal p { font-size: 15px; color: var(--text-dim); line-height: 1.8; margin-bottom: 16px; letter-spacing: -0.01em; }
+.story-modal p strong { color: var(--text); font-weight: 500; }
+.story-quote { font-size: 16px; font-style: italic; color: var(--blue); border-left: 2px solid var(--blue); padding-left: 16px; margin: 22px 0; line-height: 1.6; }
+
+/* ── ANIMATIONS ── */
+@keyframes tileIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── PHILOSOPHY GRADIENT ANIMATION ── */
+@keyframes moveVertical {
+  0%   { transform: translateY(-50%); }
+  50%  { transform: translateY(50%); }
+  100% { transform: translateY(-50%); }
+}
+@keyframes moveInCircle {
+  0%   { transform: rotate(0deg); }
+  50%  { transform: rotate(180deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes moveHorizontal {
+  0%   { transform: translateX(-50%) translateY(-10%); }
+  50%  { transform: translateX(50%) translateY(10%); }
+  100% { transform: translateX(-50%) translateY(-10%); }
+}
+
+#philGradBg {
+  position: absolute !important;
+  inset: 0;
+  z-index: 0 !important;
+  pointer-events: none;
+  border-radius: inherit;
+  overflow: hidden;
+}
+.phil-gc {
+  position: absolute; inset: 0;
+  filter: url(#blurMe) blur(20px);
+}
+.phil-blob {
+  position: absolute;
+  width: 50%; height: 50%;
+  top: calc(50% - 25%); left: calc(50% - 25%);
+  mix-blend-mode: soft-light;
+  opacity: 0.75;
+}
+.phil-blob.b1 {
+  background: radial-gradient(circle at center, rgba(242,0,137,1) 0, rgba(242,0,137,0) 50%) no-repeat;
+  transform-origin: center center;
+  animation: moveVertical 30s ease infinite;
+}
+.phil-blob.b2 {
+  background: radial-gradient(circle at center, rgba(209,0,209,0.8) 0, rgba(209,0,209,0) 50%) no-repeat;
+  transform-origin: calc(50% - 200px) center;
+  animation: moveInCircle 20s reverse infinite;
+}
+.phil-blob.b3 {
+  background: radial-gradient(circle at center, rgba(161,0,242,0.8) 0, rgba(161,0,242,0) 50%) no-repeat;
+  transform-origin: calc(50% + 200px) center;
+  animation: moveInCircle 40s linear infinite;
+}
+.phil-blob.b4 {
+  background: radial-gradient(circle at center, rgba(45,0,247,0.8) 0, rgba(45,0,247,0) 50%) no-repeat;
+  transform-origin: calc(50% - 100px) center;
+  animation: moveHorizontal 40s ease infinite;
+  opacity: 0.55;
+}
+.phil-blob.b5 {
+  background: radial-gradient(circle at center, rgba(242,0,137,0.8) 0, rgba(242,0,137,0) 50%) no-repeat;
+  transform-origin: calc(50% - 200px) calc(50% + 200px);
+  animation: moveInCircle 20s ease infinite;
+}
+.phil-blob.bptr {
+  background: radial-gradient(circle at center, rgba(209,0,209,0.6) 0, rgba(209,0,209,0) 50%) no-repeat;
+  width: 100%; height: 100%;
+  top: -50%; left: -50%;
+  opacity: 0.6;
+  transition: transform 0.1s linear;
+}
+
+/* ── CONNECT ETHEREAL SHADOW ── */
+#connectShadowBg {
+  position: absolute !important;
+  inset: 0;
+  z-index: 0 !important;
+  pointer-events: none;
+  border-radius: inherit;
+  overflow: hidden;
+}
+#connectShadowInner {
+  position: absolute;
+  inset: -100px;
+  filter: url(#connectFilter) blur(4px);
+}
+.connect-mask-div {
+  width: 100%; height: 100%;
+  background-color: rgba(0, 113, 227, 0.85);
+  -webkit-mask-image: url('https://framerusercontent.com/images/ceBGguIpUU8luwByxuQz79t7To.png');
+  mask-image: url('https://framerusercontent.com/images/ceBGguIpUU8luwByxuQz79t7To.png');
+  -webkit-mask-size: cover; mask-size: cover;
+  -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+  -webkit-mask-position: center; mask-position: center;
+}
+#connectNoise {
+  position: absolute; inset: 0;
+  background-image: url('https://framerusercontent.com/images/g0QcWrxr87K0ufOxIUFBakwYA8.png');
+  background-size: 240px; background-repeat: repeat;
+  opacity: 0.5;
+}
+
+/* ── EXPERIENCE LIQUID METAL ── */
+#expShaderBg {
+  position: absolute !important;
+  inset: 0;
+  z-index: 0 !important;
+  pointer-events: none;
+  border-radius: inherit;
+  overflow: hidden;
+}
+#expShaderBg canvas {
+  display: block;
+  filter: blur(10px);
+  animation: expPulse 8s ease-in-out infinite alternate;
+}
+@keyframes expPulse {
+  from { opacity: 0.5; transform: scale(1)    rotate(0deg); }
+  to   { opacity: 0.7; transform: scale(1.04) rotate(2deg); }
+}
+
+/* ── BLOG FALLING PATTERN ── */
+@keyframes blogFalling {
+  from {
+    background-position:
+      0px 220px, 3px 220px, 151.5px 337.5px,
+      25px 24px, 28px 24px, 176.5px 150px,
+      50px 16px, 53px 16px, 201.5px 91px,
+      75px 224px, 78px 224px, 226.5px 230.5px,
+      100px 19px, 103px 19px, 251.5px 121px,
+      125px 120px, 128px 120px, 276.5px 187px,
+      150px 31px, 153px 31px, 301.5px 120.5px,
+      175px 235px, 178px 235px, 326.5px 384.5px,
+      200px 121px, 203px 121px, 351.5px 228.5px,
+      225px 224px, 228px 224px, 376.5px 364.5px,
+      250px 26px, 253px 26px, 401.5px 105px,
+      275px 75px, 278px 75px, 426.5px 180px;
+  }
+  to {
+    background-position:
+      0px 6800px, 3px 6800px, 151.5px 6917.5px,
+      25px 13632px, 28px 13632px, 176.5px 13758px,
+      50px 5416px, 53px 5416px, 201.5px 5491px,
+      75px 17175px, 78px 17175px, 226.5px 17301.5px,
+      100px 5119px, 103px 5119px, 251.5px 5221px,
+      125px 8428px, 128px 8428px, 276.5px 8495px,
+      150px 9876px, 153px 9876px, 301.5px 9965.5px,
+      175px 13391px, 178px 13391px, 326.5px 13540.5px,
+      200px 14741px, 203px 14741px, 351.5px 14848.5px,
+      225px 18770px, 228px 18770px, 376.5px 18910.5px,
+      250px 5082px, 253px 5082px, 401.5px 5161px,
+      275px 6375px, 278px 6375px, 426.5px 6480px;
+  }
+}
+
+#blogFallingBg {
+  position: absolute !important;
+  inset: 0;
+  z-index: 0 !important;
+  pointer-events: none;
+  border-radius: inherit;
+  overflow: hidden;
+}
+.blog-falling-inner {
+  position: absolute; inset: 0;
+  background-color: var(--tile);
+  background-image:
+    radial-gradient(4px 100px at 0px 235px, #60a5fa, transparent),
+    radial-gradient(4px 100px at 300px 235px, #60a5fa, transparent),
+    radial-gradient(1.5px 1.5px at 150px 117.5px, #60a5fa 100%, transparent 150%),
+    radial-gradient(4px 100px at 0px 252px, #60a5fa, transparent),
+    radial-gradient(4px 100px at 300px 252px, #60a5fa, transparent),
+    radial-gradient(1.5px 1.5px at 150px 126px, #60a5fa 100%, transparent 150%),
+    radial-gradient(4px 100px at 0px 150px, #60a5fa, transparent),
+    radial-gradient(4px 100px at 300px 150px, #60a5fa, transparent),
+    radial-gradient(1.5px 1.5px at 150px 75px, #60a5fa 100%, transparent 150%),
+    radial-gradient(4px 100px at 0px 253px, #60a5fa, transparent),
+    radial-gradient(4px 100px at 300px 253px, #60a5fa, transparent),
+    radial-gradient(1.5px 1.5px at 150px 126.5px, #60a5fa 100%, transparent 150%),
+    radial-gradient(4px 100px at 0px 204px, #60a5fa, transparent),
+    radial-gradient(4px 100px at 300px 204px, #60a5fa, transparent),
+    radial-gradient(1.5px 1.5px at 150px 102px, #60a5fa 100%, transparent 150%),
+    radial-gradient(4px 100px at 0px 134px, #60a5fa, transparent),
+    radial-gradient(4px 100px at 300px 134px, #60a5fa, transparent),
+    radial-gradient(1.5px 1.5px at 150px 67px, #60a5fa 100%, transparent 150%),
+    radial-gradient(4px 100px at 0px 179px, #60a5fa, transparent),
+    radial-gradient(4px 100px at 300px 179px, #60a5fa, transparent),
+    radial-gradient(1.5px 1.5px at 150px 89.5px, #60a5fa 100%, transparent 150%),
+    radial-gradient(4px 100px at 0px 299px, #60a5fa, transparent),
+    radial-gradient(4px 100px at 300px 299px, #60a5fa, transparent),
+    radial-gradient(1.5px 1.5px at 150px 149.5px, #60a5fa 100%, transparent 150%),
+    radial-gradient(4px 100px at 0px 215px, #60a5fa, transparent),
+    radial-gradient(4px 100px at 300px 215px, #60a5fa, transparent),
+    radial-gradient(1.5px 1.5px at 150px 107.5px, #60a5fa 100%, transparent 150%),
+    radial-gradient(4px 100px at 0px 281px, #60a5fa, transparent),
+    radial-gradient(4px 100px at 300px 281px, #60a5fa, transparent),
+    radial-gradient(1.5px 1.5px at 150px 140.5px, #60a5fa 100%, transparent 150%),
+    radial-gradient(4px 100px at 0px 158px, #60a5fa, transparent),
+    radial-gradient(4px 100px at 300px 158px, #60a5fa, transparent),
+    radial-gradient(1.5px 1.5px at 150px 79px, #60a5fa 100%, transparent 150%),
+    radial-gradient(4px 100px at 0px 210px, #60a5fa, transparent),
+    radial-gradient(4px 100px at 300px 210px, #60a5fa, transparent),
+    radial-gradient(1.5px 1.5px at 150px 105px, #60a5fa 100%, transparent 150%);
+  background-size:
+    300px 235px, 300px 235px, 300px 235px,
+    300px 252px, 300px 252px, 300px 252px,
+    300px 150px, 300px 150px, 300px 150px,
+    300px 253px, 300px 253px, 300px 253px,
+    300px 204px, 300px 204px, 300px 204px,
+    300px 134px, 300px 134px, 300px 134px,
+    300px 179px, 300px 179px, 300px 179px,
+    300px 299px, 300px 299px, 300px 299px,
+    300px 215px, 300px 215px, 300px 215px,
+    300px 281px, 300px 281px, 300px 281px,
+    300px 158px, 300px 158px, 300px 158px,
+    300px 210px, 300px 210px, 300px 210px;
+  animation: blogFalling 150s linear infinite;
+}
+.blog-falling-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  backdrop-filter: blur(1em);
+  -webkit-backdrop-filter: blur(1em);
+  background-image: radial-gradient(circle at 50% 50%, transparent 0, transparent 2px, var(--tile) 2px);
+  background-size: 8px 8px;
+}
+
+/* ── MOBILE ── */
+@media (max-width: 900px) {
+  html, body { overflow: auto; }
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    height: auto;
+  }
+  .tile-center     { grid-area: auto; grid-column: span 2; min-height: 340px; }
+  .tile-about, .tile-skills, .tile-work,
+  .tile-experience, .tile-blog, .tile-philosophy, .tile-connect { grid-area: auto; }
+  .panel { height: 85vh; border-radius: 16px 16px 0 0; }
+}
+@media (max-width: 560px) {
+  .grid { grid-template-columns: 1fr; }
+  .tile-center { grid-column: span 1; }
+}
+
 </style>
 </head>
 <body>
 
-<div class="cursor-glow" id="cursorGlow"></div>
-
-<!-- STORY MODAL -->
-<div class="modal-overlay" id="storyModal">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal()">x</button>
-    <h2>The Story</h2>
-    <p class="modal-sub">Where it started, what it cost, and why it was worth it.</p>
-    <div class="modal-body">
-      <p>At 16, I was stuck. Not in a dramatic way. Just still. The pandemic had already taken enough from everyone, but for me it came with something extra. My family was in the middle of immigrating to the US, the paperwork had stalled, and the life I knew had quietly stopped moving. No classroom, no social life, no real direction. My batch mates were building friendships and having their teenage era. I was at home, mostly alone.</p>
-      <p>I am an introvert by nature, so the isolation was not loud. It was quiet. And quiet self-doubt is the most dangerous kind, because it just sits there and agrees with every reason you have not to try. For a while, I let it win.</p>
-      <p>I turned 17 and something shifted. I looked at where I was and made one decision: <strong>achieve something before I turn 18.</strong> No detailed plan. Just that one line I kept coming back to.</p>
-      <p>Early 2025, a founder posted about his startup. I did not wait to be chosen. I messaged him directly and told him if he ever needed help with marketing, I was his person. No portfolio, no experience, no guarantee of anything. Just a 17-year-old who had decided self-doubt was not worth the rent it was charging.</p>
-      <p>He did not hire me that day. But I showed up anyway. February 4th, 2025 was my first real task. Unpaid. I did not care. I taught myself web development, SEO, content strategy, analytics, and product thinking by actually doing them for a real company. I rebuilt an entire website, built web apps to solve problems nobody asked me to solve, developed a whole marketing campaign from scratch.</p>
-      <p>By July I was presenting our full marketing strategy to the founder and a colleague of his. They were genuinely impressed. That was the moment I became the official Marketing Lead.</p>
-      <div class="quote">The contract arrived on August 3rd, 2025. My 18th birthday. Signed.</div>
-      <p>Around the same time, the immigration papers that had been frozen for years finally started moving again. Two things I had been waiting on for most of my teenage life, unlocking at once. Not because I waited. Because I stopped waiting.</p>
-      <p>It is early 2026 now. In two months, California. And I am still building.</p>
-      <p>If you are 16 and reading this from somewhere that does not feel like it is going anywhere, I want you to hear this: you have the car, you have the engine. You are just afraid to keep moving because of the self-doubt sitting in the road. Remove it. Drive confidently. You will never know the amazing path you will end up on.</p>
-    </div>
-  </div>
-</div>
+<!-- SVG FILTERS -->
+<svg style="display:none" aria-hidden="true">
+  <defs>
+    <filter id="blurMe">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"/>
+      <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8" result="goo"/>
+      <feBlend in="SourceGraphic" in2="goo"/>
+    </filter>
+  </defs>
+</svg>
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">D<span>R</span></a>
+  <a href="/" class="nav-logo">DR</a>
   <div class="nav-right">
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#seeds-bricks">Seeds and Bricks</a></li>
-      <li><a href="#philosophy">Philosophy</a></li>
-      <li><a href="#work">Work</a></li>
-      <li><a href="#blog">Blog</a></li>
-      <li><a href="#connect">Connect</a></li>
-    </ul>
-    <button class="theme-toggle" id="themeToggle" title="Toggle theme"></button>
+    <span class="nav-domain">deaganrola.com</span>
+    <button class="theme-toggle" id="themeToggle"></button>
   </div>
 </nav>
 
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
-  <div class="hero-content">
-    <div class="hero-tag">Available for opportunities</div>
-    <h1 class="hero-title">
-      Marketing.<br>
-      <span class="hollow">Story.</span><br>
-      <span class="blue">Built.</span>
-    </h1>
-    <p class="hero-sub">
-      I am Deagan, a <strong>Marketing Strategist and Brand Storyteller</strong> who builds the systems behind the story. From campaign strategy to web infrastructure, I do not just market products. I help them find the people who need them.
-    </p>
-    <div class="hero-ctas">
-      <a href="#work" class="btn-primary">See My Work</a>
-      <a href="#" class="btn-secondary" onclick="openModal(); return false;">My Story</a>
+<!-- BENTO GRID -->
+<div class="grid">
+
+  <!-- ABOUT -->
+  <div class="tile tile-about" onclick="openPanel('about')">
+    <div id="aboutGridBg">
+      <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="aboutGridPat" width="40" height="40" patternUnits="userSpaceOnUse" x="-1" y="-1">
+            <path d="M.5 40V.5H40" fill="none"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" stroke-width="0" fill="url(#aboutGridPat)"/>
+        <svg x="-1" y="-1" overflow="visible">
+          <rect stroke-width="0" width="39" height="39" x="161" y="161"/>
+          <rect stroke-width="0" width="39" height="39" x="201" y="41"/>
+          <rect stroke-width="0" width="39" height="39" x="321" y="81"/>
+          <rect stroke-width="0" width="39" height="39" x="201" y="121"/>
+          <rect stroke-width="0" width="39" height="39" x="201" y="201"/>
+          <rect stroke-width="0" width="39" height="39" x="401" y="401"/>
+          <rect stroke-width="0" width="39" height="39" x="481" y="601"/>
+          <rect stroke-width="0" width="39" height="39" x="601" y="401"/>
+          <rect stroke-width="0" width="39" height="39" x="401" y="601"/>
+        </svg>
+      </svg>
+    </div>
+    <span class="tile-arrow">↗</span>
+    <div class="tile-label">About</div>
+    <div class="tile-title">Not the typical path.</div>
+    <div class="tile-preview">18 years old. Marketing Lead at a UK startup. Self-taught. Moving to California.</div>
+    <div class="tile-footer">
+      <span style="font-size:12px; color:var(--blue);">Full story →</span>
     </div>
   </div>
-  <div class="hero-scroll">
-    <div class="scroll-line"></div>
-    Scroll to explore
-  </div>
-</section>
 
-<!-- STATS -->
-<div class="stats-bar">
-  <div class="stat"><div class="stat-num">200<span>K+</span></div><div class="stat-label">Organic Views Generated</div></div>
-  <div class="stat"><div class="stat-num">5<span>K+</span></div><div class="stat-label">GIFs in Production</div></div>
-  <div class="stat"><div class="stat-num">36</div><div class="stat-label">Cultural Events Covered</div></div>
-  <div class="stat"><div class="stat-num">6<span>+</span></div><div class="stat-label">Web Apps Built from Scratch</div></div>
-  <div class="stat"><div class="stat-num">1</div><div class="stat-label">Year. Everything Changed.</div></div>
+  <!-- CENTER -->
+  <div class="tile tile-center">
+    <div class="center-name">Deagan Rola</div>
+    <div class="center-title">Marketing Strategist<br>& Brand Storyteller</div>
+    <div class="center-bio">I build the systems behind the story — from campaign strategy to web infrastructure.</div>
+    <div class="center-stats">
+      <div class="c-stat">
+        <div class="c-stat-num">200<span>K+</span></div>
+        <div class="c-stat-label">Organic Views</div>
+      </div>
+      <div class="c-stat">
+        <div class="c-stat-num">6<span>+</span></div>
+        <div class="c-stat-label">Web Apps</div>
+      </div>
+      <div class="c-stat">
+        <div class="c-stat-num">5<span>K+</span></div>
+        <div class="c-stat-label">GIFs in Prod</div>
+      </div>
+      <div class="c-stat">
+        <div class="c-stat-num">1</div>
+        <div class="c-stat-label">Year Changed It</div>
+      </div>
+    </div>
+    <div class="center-actions">
+      <a href="#" class="btn-primary" onclick="openPanel('work'); return false;">View Work</a>
+      <button class="btn-ghost" onclick="openStory()">My Story</button>
+    </div>
+    <div class="center-links">
+      <a href="mailto:deaganalijahrola@gmail.com" class="center-link">Email</a>
+      <a href="https://www.linkedin.com/in/deagan-rola-049ab9345/" class="center-link" target="_blank">LinkedIn</a>
+      <a href="https://x.com/deaganrola" class="center-link" target="_blank">X</a>
+      <a href="https://gifview.com" class="center-link" target="_blank">Gifview</a>
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <div class="tile tile-skills" onclick="openPanel('skills')">
+    <div id="seedsGridBg"><canvas id="seedsCanvas"></canvas></div>
+    <span class="tile-arrow">↗</span>
+    <div class="tile-label">Skills</div>
+    <div class="tile-title">Seeds</div>
+    <div class="skill-pills-preview">
+      <span class="pill-sm">Brand Strategy</span>
+      <span class="pill-sm">SEO</span>
+      <span class="pill-sm">JavaScript</span>
+      <span class="pill-sm">GA4</span>
+      <span class="pill-sm">Campaigns</span>
+    </div>
+  </div>
+
+  <!-- WORK -->
+  <div class="tile tile-work" onclick="openPanel('work')">
+    <div style="position:absolute;inset:0;z-index:0;pointer-events:none;border-radius:inherit;background:radial-gradient(circle 180px at 50% 0%, rgba(251,191,36,0.35), transparent)"></div>
+    <span class="tile-arrow">↗</span>
+    <div class="tile-label">Work</div>
+    <div class="work-preview-item">
+      <div class="work-preview-name">GIF YOU Campaign</div>
+      <div class="work-preview-type">Featured — Launching May 2026</div>
+    </div>
+    <div class="work-preview-item">
+      <div class="work-preview-name">Content Sign-Off System</div>
+      <div class="work-preview-type">Internal Tool</div>
+    </div>
+    <div class="tile-footer">
+      <span class="tile-preview" style="font-size:12px; color:var(--text-dimmer);">6 projects total</span>
+    </div>
+  </div>
+
+  <!-- EXPERIENCE -->
+  <div class="tile tile-experience" onclick="openPanel('experience')">
+    <div id="expShaderBg"><canvas id="expShaderCanvas"></canvas></div>
+    <span class="tile-arrow">↗</span>
+    <div class="tile-label">Experience</div>
+    <div class="tile-title">Marketing Lead</div>
+    <div class="tile-preview">Gifview — UK Startup<br>2025 to Present</div>
+    <div class="tile-footer">
+      <span style="font-size:12px; color:var(--text-dimmer);">+ 2 more entries</span>
+    </div>
+  </div>
+
+  <!-- BLOG -->
+  <div class="tile tile-blog" onclick="openPanel('blog')">
+    <div id="connectShadowBg">
+      <svg style="position:absolute;width:0;height:0;overflow:visible;" aria-hidden="true">
+        <defs>
+          <filter id="connectFilter">
+            <feTurbulence result="undulation" numOctaves="2" baseFrequency="0.0005,0.002" seed="0" type="turbulence"/>
+            <feColorMatrix id="connectHueRotate" in="undulation" type="hueRotate" values="180"/>
+            <feColorMatrix in="dist" result="circulation" type="matrix" values="4 0 0 0 1  4 0 0 0 1  4 0 0 0 1  1 0 0 0 0"/>
+            <feDisplacementMap in="SourceGraphic" in2="circulation" scale="100" result="dist"/>
+            <feDisplacementMap in="dist" in2="undulation" scale="100" result="output"/>
+          </filter>
+        </defs>
+      </svg>
+      <div id="connectShadowInner">
+        <div class="connect-mask-div"></div>
+      </div>
+      <div id="connectNoise"></div>
+    </div>
+    <span class="tile-arrow">↗</span>
+    <div class="tile-label">Blog</div>
+    <div class="tile-title">Thoughts worth writing down.</div>
+    <div class="tile-preview">3 posts dropping soon</div>
+  </div>
+
+  <!-- PHILOSOPHY -->
+  <div class="tile tile-philosophy" onclick="openPanel('philosophy')">
+    <div id="philGradBg">
+      <div class="phil-gc">
+        <div class="phil-blob b1"></div>
+        <div class="phil-blob b2"></div>
+        <div class="phil-blob b3"></div>
+        <div class="phil-blob b4"></div>
+        <div class="phil-blob b5"></div>
+        <div class="phil-blob bptr" id="philPointer"></div>
+      </div>
+    </div>
+    <span class="tile-arrow">↗</span>
+    <div class="tile-label">Philosophy</div>
+    <div class="tile-title">Seeds & Bricks</div>
+    <div class="tile-preview">Seeds without bricks create dreamers. Bricks without seeds create exhaustion.</div>
+  </div>
+
+  <!-- CONNECT -->
+  <div class="tile tile-connect" onclick="openPanel('connect')">
+    <div id="blogFallingBg">
+      <div class="blog-falling-inner"></div>
+      <div class="blog-falling-overlay"></div>
+    </div>
+    <span class="tile-arrow">↗</span>
+    <div class="tile-label">Connect</div>
+    <div class="tile-title">Let's work together.</div>
+    <div class="connect-email-preview">deaganalijahrola@gmail.com</div>
+  </div>
+
 </div>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="section-tag">Who I Am</div>
-  <h2 class="section-title">Not the typical path.<br>A better one.</h2>
-  <div class="about-grid">
-    <div class="about-text reveal">
-      <p>I am an 18-year-old Marketing Strategist and Brand Storyteller currently leading the marketing for a UK-based digital wellness startup, <strong>Gifview</strong>, and its first major campaign, <strong>GIF YOU</strong>, an inclusive GIF reaction library built for everyone who has ever felt invisible in a search bar.</p>
-      <p>My path was not traditional. I did not have a classroom pointing the way or a degree to lean on. What I had was time, one goal, and a decision to stop doubting myself and just do the work. I taught myself web development, SEO, analytics, content strategy, and product thinking in the middle of actually doing it for a real company.</p>
-      <p>Every skill I have was earned in the field. Every system I built solved a real problem. And I am just getting started.</p>
-      <a class="story-link" onclick="openModal(); return false;">Read my full story</a>
-    </div>
-    <div class="about-right reveal">
-      <div class="about-card"><div class="about-card-label">Current Role</div><div class="about-card-text">Marketing Lead at Gifview, UK-based Startup</div></div>
-      <div class="about-card"><div class="about-card-label">Based In</div><div class="about-card-text">Philippines, moving to California in 2026</div></div>
-      <div class="about-card"><div class="about-card-label">What I Do</div><div class="about-card-text">Brand Strategy, Content Creation, Web Development, Campaign Planning, UX Copywriting</div></div>
-      <div class="about-card"><div class="about-card-label">How I Work</div><div class="about-card-text">I build systems that scale, tell stories that connect, and never stop until the work is actually good.</div></div>
-    </div>
-  </div>
-</section>
+<!-- PANEL OVERLAY -->
+<div class="panel-overlay" id="panelOverlay" onclick="closePanel()"></div>
 
-<!-- SEEDS AND BRICKS -->
-<section id="seeds-bricks">
-  <div class="section-tag">Seeds and Bricks</div>
-  <h2 class="section-title">What I have planted.<br>What I have built.</h2>
-  <p class="section-sub">Seeds are the skills I have grown. Bricks are the experiences that shaped me. Both working together is the only way this works.</p>
-
-  <div class="sb-tabs reveal">
-    <button class="sb-tab active" onclick="switchTab('seeds', this)">Seeds (Skills)</button>
-    <button class="sb-tab" onclick="switchTab('bricks', this)">Bricks (Experience)</button>
-  </div>
-
-  <div id="seeds-panel" class="sb-panel active reveal">
-    <div class="skills-grid">
-      <div class="skill-card">
-        <div class="skill-category">Marketing and Strategy</div>
-        <div class="skill-list">
-          <span class="skill-pill">Brand Storytelling</span>
-          <span class="skill-pill">Content Strategy</span>
-          <span class="skill-pill">Campaign Planning</span>
-          <span class="skill-pill">Social Media Management</span>
-          <span class="skill-pill">Niche Targeting</span>
-          <span class="skill-pill">SEO</span>
-          <span class="skill-pill">LLM Optimization</span>
-        </div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-category">Web and Development</div>
-        <div class="skill-list">
-          <span class="skill-pill">HTML and CSS</span>
-          <span class="skill-pill">JavaScript</span>
-          <span class="skill-pill">PHP</span>
-          <span class="skill-pill">React Native</span>
-          <span class="skill-pill">WordPress</span>
-          <span class="skill-pill">Vercel</span>
-          <span class="skill-pill">Supabase</span>
-          <span class="skill-pill">REST APIs</span>
-        </div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-category">Analytics and Data</div>
-        <div class="skill-list">
-          <span class="skill-pill">Google Analytics 4</span>
-          <span class="skill-pill">Meta Pixel</span>
-          <span class="skill-pill">TikTok Pixel</span>
-          <span class="skill-pill">Event Tracking</span>
-          <span class="skill-pill">Cohort Analysis</span>
-          <span class="skill-pill">UTM Strategy</span>
-        </div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-category">Creative and Production</div>
-        <div class="skill-list">
-          <span class="skill-pill">UX Copywriting</span>
-          <span class="skill-pill">Brand Identity</span>
-          <span class="skill-pill">GIF and Animation Editing</span>
-          <span class="skill-pill">AI Prompt Crafting</span>
-          <span class="skill-pill">CapCut</span>
-          <span class="skill-pill">Canva</span>
-          <span class="skill-pill">Alight Motion</span>
-        </div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-category">Tools and Systems</div>
-        <div class="skill-list">
-          <span class="skill-pill">Notion</span>
-          <span class="skill-pill">Slack</span>
-          <span class="skill-pill">Google Drive</span>
-          <span class="skill-pill">Mailchimp</span>
-          <span class="skill-pill">Relay.app</span>
-          <span class="skill-pill">Cloudflare</span>
-          <span class="skill-pill">Hostinger</span>
-        </div>
-      </div>
-      <div class="skill-card">
-        <div class="skill-category">Languages</div>
-        <div class="skill-list">
-          <span class="skill-pill">English (Fluent)</span>
-          <span class="skill-pill">Filipino (Fluent)</span>
-          <span class="skill-pill">Spanish (Basic)</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="bricks-panel" class="sb-panel">
-    <div class="timeline">
-      <div class="timeline-item">
-        <div class="timeline-date">2025 to Present</div>
-        <div class="timeline-role">Marketing Lead</div>
-        <div class="timeline-company">Gifview, UK-based Startup (Remote)</div>
-        <div class="timeline-desc">
-          Took ownership of the entire marketing function as the sole person on the team. Built the marketing strategy from scratch, developed and launched GIF YOU as Gifview's first major campaign, rebuilt the website, created the analytics infrastructure, and shipped multiple internal tools to improve the team's workflow. Also drove 200K+ organic views across X, Reddit, and TikTok through cross-platform content campaigns. Started unpaid in February 2025 for the experience. Officially contracted August 2025.
-        </div>
-        <div class="timeline-tags">
-          <span class="timeline-tag">Brand Strategy</span>
-          <span class="timeline-tag">Campaign Development</span>
-          <span class="timeline-tag">Web Development</span>
-          <span class="timeline-tag">Content Production</span>
-          <span class="timeline-tag">Analytics</span>
-          <span class="timeline-tag">Product Thinking</span>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-date">August 2025 to Present</div>
-        <div class="timeline-role">GIF YOU Campaign Lead</div>
-        <div class="timeline-company">Gifview (Remote)</div>
-        <div class="timeline-desc">
-          Developed and executed the full GIF YOU campaign from concept to launch. This includes building the GIF library webpage with skin tone filtering and event categorization, setting up a complete analytics infrastructure with GA4, Meta Pixel, and TikTok Pixel, creating the metadata structure and naming conventions for 5,000+ GIFs, building the content sign-off system, and managing production of culturally authentic GIFs across 36 events and 6 skin tones. Launching May 2026.
-        </div>
-        <div class="timeline-tags">
-          <span class="timeline-tag">PHP and JS</span>
-          <span class="timeline-tag">GA4</span>
-          <span class="timeline-tag">Metadata Systems</span>
-          <span class="timeline-tag">Inclusive Design</span>
-          <span class="timeline-tag">AI Content Production</span>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-date">2022 to Present</div>
-        <div class="timeline-role">Self-Directed Learner</div>
-        <div class="timeline-company">Homeschool Program, Philippines</div>
-        <div class="timeline-desc">
-          Passed the PEPT placement test for Junior High and have been pursuing Senior High through a self-paced homeschool program. While the circumstances were not chosen, the mindset was. Used this period to build real skills in marketing, development, and product strategy through hands-on work rather than a classroom. Every skill listed on this page was built during this time.
-        </div>
-        <div class="timeline-tags">
-          <span class="timeline-tag">Self-Directed Learning</span>
-          <span class="timeline-tag">Discipline</span>
-          <span class="timeline-tag">Real-World Application</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PHILOSOPHY -->
-<section id="philosophy">
-  <div class="philosophy-bg"></div>
-  <div class="philosophy-content">
-    <div class="section-tag">The Philosophy</div>
-    <h2 class="section-title">Seeds and Bricks.</h2>
-    <p class="section-sub">My personal framework for growth. Two forces that, when working together, turn potential into something real.</p>
-    <div class="philosophy-grid reveal">
-      <div class="phil-card">
-        <div class="phil-letter">D</div>
-        <h3>Seeds, Development</h3>
-        <p>Every skill you learn, every idea you explore, every perspective you build. These are seeds. They grow quietly. They do not look like progress at first. But over time, they compound into capability, confidence, and opportunity.</p>
-      </div>
-      <div class="phil-card">
-        <div class="phil-letter">R</div>
-        <h3>Bricks, Resilience</h3>
-        <p>Every challenge you face, every project that pushes you, every failure that teaches you something. These are bricks. Heavy sometimes. Messy sometimes. But every one of them strengthens the structure you are building.</p>
-      </div>
-    </div>
-    <div class="philosophy-principle reveal">
-      <p><strong>Seeds without bricks create dreamers.</strong></p>
-      <p><strong>Bricks without seeds create exhaustion.</strong></p>
-      <span class="final">Together, they create builders.</span>
-      <p class="dr-easter">The DR in the logo is not just initials. It is the whole idea.</p>
-    </div>
-  </div>
-</section>
-
-<!-- WORK -->
-<section id="work">
-  <div class="work-header reveal">
+<!-- SLIDE PANEL -->
+<div class="panel" id="panel">
+  <div class="panel-header">
     <div>
-      <div class="section-tag">The Work</div>
-      <h2 class="section-title">Built with purpose.<br>Every single one.</h2>
+      <div class="panel-title" id="panelTitle"></div>
+      <div class="panel-subtitle" id="panelSubtitle"></div>
     </div>
-    <p style="color:var(--text-dim);font-size:15px;max-width:300px;line-height:1.6;">Not just projects. Solutions to real problems I ran into while doing the actual work.</p>
+    <button class="panel-close" onclick="closePanel()">✕</button>
   </div>
-  <div class="projects-grid">
-    <div class="project-card featured reveal">
-      <div class="project-tag">Featured Campaign</div>
-      <h3>GIF YOU, Inclusive GIF Reaction Library</h3>
-      <p>Most GIF libraries were built for some people. GIF YOU was built for everyone. I developed the entire marketing campaign, website infrastructure, analytics setup, and content production system for a library of 5,000+ diverse GIFs covering 36 cultural events, 6 skin tones, and 3 age groups. Because representation should not stop at a reaction GIF. Launching May 2026.</p>
-      <div class="project-footer">
-        <span class="tech-tag">Campaign Strategy</span>
-        <span class="tech-tag">Web Dev</span>
-        <span class="tech-tag">GA4</span>
-        <span class="tech-tag">WordPress</span>
-        <span class="tech-tag">PHP and JS</span>
-      </div>
-    </div>
-    <div class="project-card reveal">
-      <div class="project-tag">Web Development</div>
-      <h3>Gifview Website Rebuild</h3>
-      <p>Migrated and rebuilt Gifview's entire website from a basic drag-and-drop builder to a fully custom platform. Rewrote all copy around digital wellness and user engagement. Built from scratch.</p>
-      <div class="project-footer">
-        <span class="tech-tag">WordPress</span>
-        <span class="tech-tag">Hostinger</span>
-        <span class="tech-tag">Copywriting</span>
-      </div>
-    </div>
-    <div class="project-card reveal">
-      <div class="project-tag">Internal Tool</div>
-      <h3>Content Sign-Off System</h3>
-      <p>Built a full-stack internal web app to replace a slow manual workflow. The team now reviews, approves, and tracks every GIF through one clean system. Zero cost. Big productivity gain. Nobody asked for it. I just built it.</p>
-      <div class="project-footer">
-        <span class="tech-tag">Supabase</span>
-        <span class="tech-tag">Cloudflare</span>
-        <span class="tech-tag">Vercel</span>
-        <span class="tech-tag">JavaScript</span>
-      </div>
-    </div>
-    <div class="project-card reveal">
-      <div class="project-tag">Productivity Tool</div>
-      <h3>Batch Watermarking and File Tool</h3>
-      <p>Built because manually watermarking hundreds of GIFs one by one was eating time better spent elsewhere. Handles batch watermarking, file renaming, and file conversion in one place.</p>
-      <div class="project-footer">
-        <span class="tech-tag">JavaScript</span>
-        <span class="tech-tag">CSS</span>
-        <span class="tech-tag">File API</span>
-      </div>
-    </div>
-    <div class="project-card reveal">
-      <div class="project-tag">Marketing Tool</div>
-      <h3>SEO and LLM Copilot</h3>
-      <p>A content analyzer that optimizes for both traditional search and AI discovery. Built because the way people find things is changing fast, and I wanted to stay ahead of that shift.</p>
-      <div class="project-footer">
-        <span class="tech-tag">JavaScript</span>
-        <span class="tech-tag">SEO</span>
-        <span class="tech-tag">LLM Optimization</span>
-      </div>
-    </div>
-    <div class="project-card reveal">
-      <div class="project-tag">API Project</div>
-      <h3>Sora Batch Video Generator</h3>
-      <p>Custom web app powered by the Sora API for generating large volumes of AI video content without third-party watermarks. First time working with an external API. Hardest project I had done to that point. Shipped it anyway.</p>
-      <div class="project-footer">
-        <span class="tech-tag">Sora API</span>
-        <span class="tech-tag">JavaScript</span>
-        <span class="tech-tag">REST API</span>
-      </div>
-    </div>
-  </div>
-</section>
+  <div class="panel-body" id="panelBody"></div>
+</div>
 
-<!-- BLOG -->
-<section id="blog">
-  <div class="section-tag">The Blog</div>
-  <h2 class="section-title reveal">Thoughts worth writing down.</h2>
-  <p class="section-sub reveal">On marketing, building in public, growth, and what it actually feels like to figure things out as you go.</p>
-  <div class="blog-grid">
-    <div class="blog-card reveal">
-      <div class="blog-thumb blog-thumb-1">🌱</div>
-      <div class="blog-body">
-        <div class="blog-meta">
-          <span class="blog-cat">Philosophy</span>
-          <span class="blog-date">Coming Soon</span>
-        </div>
-        <h3>Seeds and Bricks: The Framework I Built to Understand My Own Growth</h3>
-        <p>Why I stopped thinking about success as a destination and started thinking about it as something you construct, one skill and one experience at a time.</p>
-      </div>
-      <div class="blog-footer">Read when it drops</div>
-    </div>
-    <div class="blog-card reveal">
-      <div class="blog-thumb blog-thumb-2">🎯</div>
-      <div class="blog-body">
-        <div class="blog-meta">
-          <span class="blog-cat">Marketing</span>
-          <span class="blog-date">Coming Soon</span>
-        </div>
-        <h3>Why We Stopped Competing with Giphy and Built Something They Cannot Copy</h3>
-        <p>The SEO strategy, the niche discovery, and the thinking behind GIF YOU. How a small team found its blue ocean in a market dominated by giants.</p>
-      </div>
-      <div class="blog-footer">Read when it drops</div>
-    </div>
-    <div class="blog-card reveal">
-      <div class="blog-thumb blog-thumb-3">🧱</div>
-      <div class="blog-body">
-        <div class="blog-meta">
-          <span class="blog-cat">Building in Public</span>
-          <span class="blog-date">Coming Soon</span>
-        </div>
-        <h3>I Built 6 Web Apps Without a Computer Science Degree. Here Is What I Learned.</h3>
-        <p>From a watermarking tool nobody asked for to a full stack content approval system with authentication. What self-teaching actually looks like when the stakes are real.</p>
-      </div>
-      <div class="blog-footer">Read when it drops</div>
-    </div>
+<!-- STORY MODAL -->
+<div class="story-overlay" id="storyOverlay" onclick="if(event.target===this)closeStory()">
+  <div class="story-modal">
+    <button class="story-close" onclick="closeStory()">✕</button>
+    <h2>The Story</h2>
+    <p class="story-sub">Where it started, what it cost, and why it was worth it.</p>
+    <p>At 16, I was stuck. Not in a dramatic way. Just still. The pandemic had already taken enough from everyone, but for me it came with something extra. My family was in the middle of immigrating to the US, the paperwork had stalled, and the life I knew had quietly stopped moving. No classroom, no social life, no real direction. My batch mates were building friendships and having their teenage era. I was at home, mostly alone.</p>
+    <p>I am an introvert by nature, so the isolation was not loud. It was quiet. And quiet self-doubt is the most dangerous kind, because it just sits there and agrees with every reason you have not to try. For a while, I let it win.</p>
+    <p>I turned 17 and something shifted. I looked at where I was and made one decision: <strong>achieve something before I turn 18.</strong> No detailed plan. Just that one line I kept coming back to.</p>
+    <p>Early 2025, a founder posted about his startup. I did not wait to be chosen. I messaged him directly and told him if he ever needed help with marketing, I was his person. No portfolio, no experience, no guarantee of anything. Just a 17-year-old who had decided self-doubt was not worth the rent it was charging.</p>
+    <p>He did not hire me that day. But I showed up anyway. February 4th, 2025 was my first real task. Unpaid. I did not care. I taught myself web development, SEO, content strategy, analytics, and product thinking by actually doing them for a real company. I rebuilt an entire website, built web apps to solve problems nobody asked me to solve, developed a whole marketing campaign from scratch.</p>
+    <p>By July I was presenting our full marketing strategy to the founder and a colleague of his. They were genuinely impressed. That was the moment I became the official Marketing Lead.</p>
+    <div class="story-quote">The contract arrived on August 3rd, 2025. My 18th birthday. Signed.</div>
+    <p>Around the same time, the immigration papers that had been frozen for years finally started moving again. Two things I had been waiting on for most of my teenage life, unlocking at once. Not because I waited. Because I stopped waiting.</p>
+    <p>It is early 2026 now. In two months, California. And I am still building.</p>
+    <p>If you are 16 and reading this from somewhere that does not feel like it is going anywhere — you have the car, you have the engine. You are just afraid to keep moving because of the self-doubt sitting in the road. Remove it. Drive confidently. You will never know the amazing path you will end up on.</p>
   </div>
-</section>
-
-<!-- CONNECT -->
-<section id="connect">
-  <div class="connect-bg"></div>
-  <div class="connect-content reveal">
-    <div class="section-tag">Connect</div>
-    <h2 class="section-title">Building something real?<br>Let us make it matter.</h2>
-    <p class="section-sub">Open to meaningful work in marketing strategy, brand storytelling, campaign development, or anything that sits at the intersection of creativity and systems thinking.</p>
-    <a href="mailto:deaganalijahrola@gmail.com" class="connect-email">deaganalijahrola@gmail.com</a>
-    <div class="social-links">
-      <a href="#" class="social-link">X / Twitter</a>
-      <a href="#" class="social-link">LinkedIn</a>
-      <a href="#" class="social-link">Gifview</a>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-logo">D<span>R</span></div>
-  <p>2026 Deagan Rola. Built from scratch, with purpose.</p>
-  <p>Philippines, moving to California</p>
-</footer>
+</div>
 
 <script>
-  // Cursor glow
-  const glow = document.getElementById('cursorGlow');
-  document.addEventListener('mousemove', e => {
-    glow.style.left = e.clientX + 'px';
-    glow.style.top = e.clientY + 'px';
+// Theme
+document.getElementById('themeToggle').addEventListener('click', () => {
+  const html = document.documentElement;
+  html.setAttribute('data-theme', html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+});
+
+// Panel content
+const panels = {
+  about: {
+    title: 'About',
+    subtitle: 'Who I am and where I came from.',
+    html: `
+      <div class="panel-text">
+        <p>I am an 18-year-old Marketing Strategist and Brand Storyteller currently leading the marketing for a UK-based digital wellness startup, <strong>Gifview</strong>, and its first major campaign, <strong>GIF YOU</strong> — an inclusive GIF reaction library built for everyone who has ever felt invisible in a search bar.</p>
+        <p>My path was not traditional. I did not have a classroom pointing the way or a degree to lean on. What I had was time, one goal, and a decision to stop doubting myself and just do the work. I taught myself web development, SEO, analytics, content strategy, and product thinking in the middle of actually doing it for a real company.</p>
+        <p>Every skill I have was earned in the field. Every system I built solved a real problem. And I am just getting started.</p>
+      </div>
+      <div class="info-rows">
+        <div class="info-row"><div class="info-label">Current Role</div><div class="info-value">Marketing Lead at Gifview, UK-based Startup</div></div>
+        <div class="info-row"><div class="info-label">Based In</div><div class="info-value">Philippines → California (2026)</div></div>
+        <div class="info-row"><div class="info-label">What I Do</div><div class="info-value">Brand Strategy, Content Creation, Web Development, Campaign Planning, UX Copywriting</div></div>
+        <div class="info-row"><div class="info-label">How I Work</div><div class="info-value">I build systems that scale, tell stories that connect, and never stop until the work is actually good.</div></div>
+      </div>`
+  },
+  skills: {
+    title: 'Skills',
+    subtitle: 'The seeds — everything I\'ve grown.',
+    html: `
+      <div class="skills-panel-grid">
+        <div><div class="skill-group-title">Marketing & Strategy</div><div class="skill-pills"><span class="skill-pill">Brand Storytelling</span><span class="skill-pill">Content Strategy</span><span class="skill-pill">Campaign Planning</span><span class="skill-pill">Social Media Management</span><span class="skill-pill">Niche Targeting</span><span class="skill-pill">SEO</span><span class="skill-pill">LLM Optimization</span></div></div>
+        <div><div class="skill-group-title">Web & Development</div><div class="skill-pills"><span class="skill-pill">HTML & CSS</span><span class="skill-pill">JavaScript</span><span class="skill-pill">PHP</span><span class="skill-pill">React Native</span><span class="skill-pill">WordPress</span><span class="skill-pill">Vercel</span><span class="skill-pill">Supabase</span><span class="skill-pill">REST APIs</span></div></div>
+        <div><div class="skill-group-title">Analytics & Data</div><div class="skill-pills"><span class="skill-pill">Google Analytics 4</span><span class="skill-pill">Meta Pixel</span><span class="skill-pill">TikTok Pixel</span><span class="skill-pill">Event Tracking</span><span class="skill-pill">Cohort Analysis</span><span class="skill-pill">UTM Strategy</span></div></div>
+        <div><div class="skill-group-title">Creative & Production</div><div class="skill-pills"><span class="skill-pill">UX Copywriting</span><span class="skill-pill">Brand Identity</span><span class="skill-pill">GIF & Animation Editing</span><span class="skill-pill">AI Prompt Crafting</span><span class="skill-pill">CapCut</span><span class="skill-pill">Canva</span><span class="skill-pill">Alight Motion</span></div></div>
+        <div><div class="skill-group-title">Tools & Systems</div><div class="skill-pills"><span class="skill-pill">Notion</span><span class="skill-pill">Slack</span><span class="skill-pill">Mailchimp</span><span class="skill-pill">Relay.app</span><span class="skill-pill">Cloudflare</span><span class="skill-pill">Hostinger</span></div></div>
+        <div><div class="skill-group-title">Languages</div><div class="skill-pills"><span class="skill-pill">English (Fluent)</span><span class="skill-pill">Filipino (Fluent)</span><span class="skill-pill">Spanish (Basic)</span></div></div>
+      </div>`
+  },
+  experience: {
+    title: 'Experience',
+    subtitle: 'The bricks — everything that shaped me.',
+    html: `
+      <div class="exp-items">
+        <div class="exp-item">
+          <div class="exp-date">2025 to Present</div>
+          <div class="exp-role">Marketing Lead</div>
+          <div class="exp-company">Gifview, UK-based Startup (Remote)</div>
+          <div class="exp-desc">Took ownership of the entire marketing function as the sole person on the team. Built the strategy from scratch, launched GIF YOU, rebuilt the website, created the analytics infrastructure, and shipped multiple internal tools. Drove 200K+ organic views across X, Reddit, and TikTok. Started unpaid February 2025. Officially contracted August 2025.</div>
+          <div class="exp-tags"><span class="exp-tag">Brand Strategy</span><span class="exp-tag">Campaign Development</span><span class="exp-tag">Web Development</span><span class="exp-tag">Analytics</span></div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-date">August 2025 to Present</div>
+          <div class="exp-role">GIF YOU Campaign Lead</div>
+          <div class="exp-company">Gifview (Remote)</div>
+          <div class="exp-desc">Developed and executed the full GIF YOU campaign from concept to launch — building the library webpage, analytics infrastructure with GA4/Meta/TikTok Pixel, metadata naming conventions for 5,000+ GIFs, content sign-off system, and managing production across 36 events and 6 skin tones. Launching May 2026.</div>
+          <div class="exp-tags"><span class="exp-tag">PHP & JS</span><span class="exp-tag">GA4</span><span class="exp-tag">Metadata Systems</span><span class="exp-tag">Inclusive Design</span></div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-date">2022 to Present</div>
+          <div class="exp-role">Self-Directed Learner</div>
+          <div class="exp-company">Homeschool Program, Philippines</div>
+          <div class="exp-desc">Passed the PEPT placement test for Junior High and pursued Senior High through a self-paced program. Used this time to build real skills in marketing, development, and product strategy through hands-on work. Every skill on this page was built during this time.</div>
+          <div class="exp-tags"><span class="exp-tag">Self-Directed Learning</span><span class="exp-tag">Discipline</span><span class="exp-tag">Real-World Application</span></div>
+        </div>
+      </div>`
+  },
+  work: {
+    title: 'Work',
+    subtitle: 'Built with purpose. Every single one.',
+    html: `
+      <div class="work-items">
+        <div class="work-item"><div class="work-item-type">Featured Campaign</div><div class="work-item-title">GIF YOU — Inclusive GIF Reaction Library</div><div class="work-item-desc">Most GIF libraries were built for some people. GIF YOU was built for everyone. I developed the entire marketing campaign, website infrastructure, analytics setup, and content production system for a library of 5,000+ diverse GIFs covering 36 cultural events, 6 skin tones, and 3 age groups. Launching May 2026.</div><div class="work-item-tags"><span class="work-tag">Campaign Strategy</span><span class="work-tag">Web Dev</span><span class="work-tag">GA4</span><span class="work-tag">WordPress</span></div></div>
+        <div class="work-item"><div class="work-item-type">Web Development</div><div class="work-item-title">Gifview Website Rebuild</div><div class="work-item-desc">Migrated and rebuilt Gifview's entire website from a basic drag-and-drop builder to a fully custom platform. Rewrote all copy around digital wellness and user engagement. Built from scratch.</div><div class="work-item-tags"><span class="work-tag">WordPress</span><span class="work-tag">Hostinger</span><span class="work-tag">Copywriting</span></div></div>
+        <div class="work-item"><div class="work-item-type">Internal Tool</div><div class="work-item-title">Content Sign-Off System</div><div class="work-item-desc">Built a full-stack internal web app to replace a slow manual workflow. The team now reviews, approves, and tracks every GIF through one clean system. Zero cost. Big productivity gain. Nobody asked for it. I just built it.</div><div class="work-item-tags"><span class="work-tag">Supabase</span><span class="work-tag">Cloudflare</span><span class="work-tag">Vercel</span><span class="work-tag">JavaScript</span></div></div>
+        <div class="work-item"><div class="work-item-type">Productivity Tool</div><div class="work-item-title">Batch Watermarking & File Tool</div><div class="work-item-desc">Built because manually watermarking hundreds of GIFs one by one was eating time better spent elsewhere. Handles batch watermarking, file renaming, and file conversion in one place.</div><div class="work-item-tags"><span class="work-tag">JavaScript</span><span class="work-tag">CSS</span><span class="work-tag">File API</span></div></div>
+        <div class="work-item"><div class="work-item-type">Marketing Tool</div><div class="work-item-title">SEO & LLM Copilot</div><div class="work-item-desc">A content analyzer that optimizes for both traditional search and AI discovery. Built because the way people find things is changing fast, and I wanted to stay ahead of that shift.</div><div class="work-item-tags"><span class="work-tag">JavaScript</span><span class="work-tag">SEO</span><span class="work-tag">LLM Optimization</span></div></div>
+        <div class="work-item"><div class="work-item-type">API Project</div><div class="work-item-title">Sora Batch Video Generator</div><div class="work-item-desc">Custom web app powered by the Sora API for generating large volumes of AI video content without third-party watermarks. First time working with an external API. Hardest project to that point. Shipped it anyway.</div><div class="work-item-tags"><span class="work-tag">Sora API</span><span class="work-tag">JavaScript</span><span class="work-tag">REST API</span></div></div>
+      </div>`
+  },
+  blog: {
+    title: 'Blog',
+    subtitle: 'Thoughts worth writing down.',
+    html: `
+      <div class="blog-items">
+        <div class="blog-item"><div class="blog-thumb blog-thumb-1"><span class="blog-thumb-label">Philosophy</span></div><div class="blog-item-body"><div class="blog-item-cat">Philosophy</div><div class="blog-item-title">Seeds and Bricks: The Framework I Built to Understand My Own Growth</div><div class="blog-item-desc">Why I stopped thinking about success as a destination and started thinking about it as something you construct, one skill and one experience at a time.</div></div><div class="blog-item-footer">Coming Soon</div></div>
+        <div class="blog-item"><div class="blog-thumb blog-thumb-2"><span class="blog-thumb-label">Marketing</span></div><div class="blog-item-body"><div class="blog-item-cat">Marketing</div><div class="blog-item-title">Why We Stopped Competing with Giphy and Built Something They Cannot Copy</div><div class="blog-item-desc">The SEO strategy, the niche discovery, and the thinking behind GIF YOU. How a small team found its blue ocean in a market dominated by giants.</div></div><div class="blog-item-footer">Coming Soon</div></div>
+        <div class="blog-item"><div class="blog-thumb blog-thumb-3"><span class="blog-thumb-label">Building in Public</span></div><div class="blog-item-body"><div class="blog-item-cat">Building in Public</div><div class="blog-item-title">I Built 6 Web Apps Without a Computer Science Degree. Here Is What I Learned.</div><div class="blog-item-desc">From a watermarking tool nobody asked for to a full stack content approval system. What self-teaching actually looks like when the stakes are real.</div></div><div class="blog-item-footer">Coming Soon</div></div>
+      </div>`
+  },
+  philosophy: {
+    title: 'Philosophy',
+    subtitle: 'Seeds & Bricks — my personal framework.',
+    html: `
+      <div class="phil-items">
+        <div class="phil-item"><div class="phil-item-label">Seeds — Development</div><div class="phil-item-title">Every skill you grow is a seed.</div><div class="phil-item-text">Every skill you learn, every idea you explore, every perspective you build. They grow quietly. They do not look like progress at first. But over time, they compound into capability, confidence, and opportunity.</div></div>
+        <div class="phil-item"><div class="phil-item-label">Bricks — Resilience</div><div class="phil-item-title">Every challenge you face is a brick.</div><div class="phil-item-text">Every project that pushes you, every failure that teaches you something. Heavy sometimes. Messy sometimes. But every one of them strengthens the structure you are building.</div></div>
+      </div>
+      <div class="phil-principle">
+        <p><strong>Seeds without bricks create dreamers.</strong><br><strong>Bricks without seeds create exhaustion.</strong></p>
+        <span class="final">Together, they create builders.</span>
+        <p class="phil-easter">The DR in the logo is not just initials. It is the whole idea.</p>
+      </div>`
+  },
+  connect: {
+    title: 'Connect',
+    subtitle: 'Building something real? Let\'s make it matter.',
+    html: `
+      <p style="font-size:15px;color:var(--text-dim);line-height:1.7;letter-spacing:-0.01em;margin-bottom:22px;">Open to meaningful work in marketing strategy, brand storytelling, campaign development, or anything at the intersection of creativity and systems thinking.</p>
+      <a href="mailto:deaganalijahrola@gmail.com" class="connect-panel-email">deaganalijahrola@gmail.com</a>
+      <div class="connect-social-links">
+        <a href="https://www.linkedin.com/in/deagan-rola-049ab9345/" class="connect-social-link" target="_blank"><span class="connect-social-name">LinkedIn</span><span class="connect-social-handle">deagan-rola-049ab9345</span></a>
+        <a href="https://x.com/deaganrola" class="connect-social-link" target="_blank"><span class="connect-social-name">X / Twitter</span><span class="connect-social-handle">@deaganrola</span></a>
+        <a href="https://gifview.com" class="connect-social-link" target="_blank"><span class="connect-social-name">Gifview</span><span class="connect-social-handle">gifview.com</span></a>
+      </div>`
+  }
+};
+
+function openPanel(id) {
+  const data = panels[id];
+  if (!data) return;
+  document.getElementById('panelTitle').textContent = data.title;
+  document.getElementById('panelSubtitle').textContent = data.subtitle;
+  document.getElementById('panelBody').innerHTML = data.html;
+  document.getElementById('panel').classList.add('open');
+  document.getElementById('panelOverlay').classList.add('open');
+}
+
+function closePanel() {
+  document.getElementById('panel').classList.remove('open');
+  document.getElementById('panelOverlay').classList.remove('open');
+}
+
+function openStory() {
+  document.getElementById('storyOverlay').classList.add('open');
+}
+
+function closeStory() {
+  document.getElementById('storyOverlay').classList.remove('open');
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closePanel(); closeStory(); }
+});
+
+// ── CONNECT ETHEREAL SHADOW ──
+(function () {
+  const hueEl = document.getElementById('connectHueRotate');
+  if (!hueEl) return;
+  const rotDuration = 5840; // ms per full 360° hue cycle (matches speed:90)
+  function animate(t) {
+    hueEl.setAttribute('values', String((t / rotDuration * 360) % 360));
+    requestAnimationFrame(animate);
+  }
+  requestAnimationFrame(animate);
+})();
+
+// ── EXPERIENCE LIQUID METAL SHADER ──
+(function () {
+  const tile = document.querySelector('.tile-experience');
+  const canvas = document.getElementById('expShaderCanvas');
+  if (!tile || !canvas) return;
+
+  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) return;
+
+  const vsrc = `
+    attribute vec2 a_pos;
+    void main() { gl_Position = vec4(a_pos, 0.0, 1.0); }
+  `;
+  const fsrc = `
+    precision mediump float;
+    uniform float u_time;
+    uniform vec2 u_res;
+
+    vec2 hash2(vec2 p) {
+      p = vec2(dot(p, vec2(127.1,311.7)), dot(p, vec2(269.5,183.3)));
+      return -1.0 + 2.0 * fract(sin(p) * 43758.5453);
+    }
+    float gnoise(vec2 p) {
+      vec2 i = floor(p); vec2 f = fract(p);
+      vec2 u = f*f*(3.0-2.0*f);
+      return mix(
+        mix(dot(hash2(i),           f),           dot(hash2(i+vec2(1,0)), f-vec2(1,0)), u.x),
+        mix(dot(hash2(i+vec2(0,1)), f-vec2(0,1)), dot(hash2(i+vec2(1,1)), f-vec2(1,1)), u.x),
+        u.y);
+    }
+
+    void main() {
+      vec2 uv = gl_FragCoord.xy / u_res;
+      float t = u_time * 0.4;
+
+      float c = cos(0.436); float s = sin(0.436);
+      uv = vec2(c*uv.x - s*uv.y, s*uv.x + c*uv.y);
+
+      float n  = gnoise(uv*4.0 + vec2(t, t*0.6));
+      n += 0.5  * gnoise(uv*8.0  + vec2(-t*1.2, t*0.8));
+      n += 0.25 * gnoise(uv*16.0 + vec2(t*0.5, -t));
+      n = clamp(n*0.57 + 0.5, 0.0, 1.0);
+
+      float r = clamp(gnoise(uv*4.0 + vec2(t+0.25, t*0.6))*0.5+0.5, 0.0, 1.0);
+      float b = clamp(gnoise(uv*4.0 + vec2(t-0.25, t*0.6+0.25))*0.5+0.5, 0.0, 1.0);
+
+      vec3 dark   = vec3(0.35, 0.18, 0.04);
+      vec3 tint   = vec3(0.87, 0.46, 0.11);
+      vec3 bright = vec3(0.95, 0.78, 0.35);
+
+      vec3 col = mix(dark, mix(tint, bright, n), n);
+      col.r = mix(col.r, r * bright.r, 0.25);
+      col.b = mix(col.b, b * 0.05, 0.25);
+
+      gl_FragColor = vec4(col, 0.85);
+    }
+  `;
+
+  function mkShader(type, src) {
+    const sh = gl.createShader(type);
+    gl.shaderSource(sh, src); gl.compileShader(sh); return sh;
+  }
+  const prog = gl.createProgram();
+  gl.attachShader(prog, mkShader(gl.VERTEX_SHADER, vsrc));
+  gl.attachShader(prog, mkShader(gl.FRAGMENT_SHADER, fsrc));
+  gl.linkProgram(prog); gl.useProgram(prog);
+
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+  const aPos = gl.getAttribLocation(prog, 'a_pos');
+  gl.enableVertexAttribArray(aPos);
+  gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+  const uTime = gl.getUniformLocation(prog, 'u_time');
+  const uRes  = gl.getUniformLocation(prog, 'u_res');
+  gl.enable(gl.BLEND);
+  gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
+  function resize() {
+    const r = tile.getBoundingClientRect();
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = r.width * dpr; canvas.height = r.height * dpr;
+    canvas.style.width = r.width + 'px'; canvas.style.height = r.height + 'px';
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    gl.uniform2f(uRes, canvas.width, canvas.height);
+  }
+  resize();
+  new ResizeObserver(resize).observe(tile);
+
+  let animId;
+  function animate(t) {
+    gl.uniform1f(uTime, t / 1000);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    animId = requestAnimationFrame(animate);
+  }
+  new IntersectionObserver(([e]) => {
+    if (e.isIntersecting) animId = requestAnimationFrame(animate);
+    else cancelAnimationFrame(animId);
+  }, { threshold: 0 }).observe(canvas);
+})();
+
+// ── PHILOSOPHY GRADIENT POINTER ──
+(function () {
+  const tile = document.querySelector('.tile-philosophy');
+  const ptr = document.getElementById('philPointer');
+  if (!tile || !ptr) return;
+  let curX = 0, curY = 0, tgX = 0, tgY = 0, rafId;
+  function loop() {
+    curX += (tgX - curX) / 20;
+    curY += (tgY - curY) / 20;
+    ptr.style.transform = `translate(${Math.round(curX)}px,${Math.round(curY)}px)`;
+    rafId = requestAnimationFrame(loop);
+  }
+  tile.addEventListener('pointermove', e => {
+    const r = tile.getBoundingClientRect();
+    tgX = e.clientX - r.left;
+    tgY = e.clientY - r.top;
   });
+  rafId = requestAnimationFrame(loop);
+})();
 
-  // Scroll reveal
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 80);
-    });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+// ── SEEDS FLICKERING GRID ──
+(function () {
+  const tile = document.querySelector('.tile-skills');
+  const canvas = document.getElementById('seedsCanvas');
+  if (!tile || !canvas) return;
+  const ctx = canvas.getContext('2d');
 
-  // Timeline reveal
-  const tlObserver = new IntersectionObserver(entries => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 150);
-    });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.timeline-item').forEach(el => tlObserver.observe(el));
+  const SQ = 4, GAP = 4, FLICKER = 0.14, MAX_OP = 0.22;
+  const isDark = () => document.documentElement.getAttribute('data-theme') === 'dark';
+  const color = () => isDark() ? '167,139,250' : '109,40,217';
 
-  // Theme toggle
-  const toggle = document.getElementById('themeToggle');
-  toggle.addEventListener('click', () => {
-    const html = document.documentElement;
-    html.setAttribute('data-theme', html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
-  });
+  let cols, rows, squares, dpr, animId, lastT = 0;
 
-  // Tab switching
-  function switchTab(tab, btn) {
-    document.querySelectorAll('.sb-tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.sb-panel').forEach(p => p.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById(tab + '-panel').classList.add('active');
+  function setup() {
+    const r = tile.getBoundingClientRect();
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = r.width * dpr;
+    canvas.height = r.height * dpr;
+    canvas.style.width = r.width + 'px';
+    canvas.style.height = r.height + 'px';
+    cols = Math.floor(r.width / (SQ + GAP));
+    rows = Math.floor(r.height / (SQ + GAP));
+    squares = new Float32Array(cols * rows);
+    for (let i = 0; i < squares.length; i++) squares[i] = Math.random() * MAX_OP;
   }
 
-  // Modal
-  function openModal() {
-    document.getElementById('storyModal').classList.add('open');
-    document.body.style.overflow = 'hidden';
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const c = color();
+    for (let i = 0; i < cols; i++) {
+      for (let j = 0; j < rows; j++) {
+        ctx.fillStyle = `rgba(${c},${squares[i * rows + j]})`;
+        ctx.fillRect(i * (SQ + GAP) * dpr, j * (SQ + GAP) * dpr, SQ * dpr, SQ * dpr);
+      }
+    }
   }
-  function closeModal() {
-    document.getElementById('storyModal').classList.remove('open');
-    document.body.style.overflow = '';
+
+  function animate(t) {
+    const dt = Math.min((t - lastT) / 1000, 0.1);
+    lastT = t;
+    for (let i = 0; i < squares.length; i++) {
+      if (Math.random() < FLICKER * dt) squares[i] = Math.random() * MAX_OP;
+    }
+    draw();
+    animId = requestAnimationFrame(animate);
   }
-  document.getElementById('storyModal').addEventListener('click', e => {
-    if (e.target === document.getElementById('storyModal')) closeModal();
-  });
+
+  setup();
+  new ResizeObserver(setup).observe(tile);
+
+  new IntersectionObserver(([e]) => {
+    if (e.isIntersecting) animId = requestAnimationFrame(animate);
+    else cancelAnimationFrame(animId);
+  }, { threshold: 0 }).observe(canvas);
+})();
 </script>
 </body>
 </html>
